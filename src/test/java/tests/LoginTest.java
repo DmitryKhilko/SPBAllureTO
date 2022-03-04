@@ -36,7 +36,13 @@ public class LoginTest extends BaseTest {
         loginPage
                 .login(superuserLogin, superuserPassword)
                 .closeNotificationWindow()
-                .userNameShouldHave(superuserName);
+                .userNameShouldHave(superuserName)
+                .menuItemShouldBeVisible("Квалификационный экзамен")
+                .menuItemShouldBeVisible("Подтверждение квалификации")
+                .menuItemShouldBeVisible("Ведение реестра сертификатов")
+                .menuItemShouldBeVisible("Курирование деятельности по сертификации")
+                .menuItemShouldBeVisible("Подготовка базы данных знаний")
+                .submenuItemShouldBeVisible("Администрирование");
     }
 
     @Description("Войти в приложение под ролью 'Администратор'. Проверить после входа в приложение: наличие пункта меню с именем текущего пользователя; наличие пунктов горизонтального меню, соответствующих роли")
@@ -45,7 +51,13 @@ public class LoginTest extends BaseTest {
         loginPage
                 .login(adminLogin, adminPassword)
                 .closeNotificationWindow()
-                .userNameShouldHave(adminName);
+                .userNameShouldHave(adminName)
+                .menuItemShouldNotVisible("Квалификационный экзамен")
+                .menuItemShouldNotVisible("Подтверждение квалификации")
+                .menuItemShouldNotVisible("Ведение реестра сертификатов")
+                .menuItemShouldNotVisible("Курирование деятельности по сертификации")
+                .menuItemShouldNotVisible("Подготовка базы данных знаний")
+                .menuItemShouldBeVisible("Администрирование");
     }
 
     @Description("Войти в приложение под ролью 'Специалист Минфина'. Проверить после входа в приложение: наличие пункта меню с именем текущего пользователя; наличие пунктов горизонтального меню, соответствующих роли")
@@ -54,7 +66,13 @@ public class LoginTest extends BaseTest {
         loginPage
                 .login(specialistMinfinLogin, specialistMinfinPassword)
                 .closeNotificationWindow()
-                .userNameShouldHave(specialistMinfinName);
+                .userNameShouldHave(specialistMinfinName)
+                .menuItemShouldBeVisible("Квалификационный экзамен")
+                .menuItemShouldBeVisible("Подтверждение квалификации")
+                .menuItemShouldBeVisible("Ведение реестра сертификатов")
+                .menuItemShouldBeVisible("Курирование деятельности по сертификации")
+                .menuItemShouldBeVisible("Подготовка базы данных знаний")
+                .submenuItemShouldNotVisible("Администрирование");
     }
 
     @Description("Войти в приложение под ролью 'Секретарь КК'. Проверить после входа в приложение: наличие пункта меню с именем текущего пользователя; наличие пунктов горизонтального меню, соответствующих роли")
@@ -63,7 +81,13 @@ public class LoginTest extends BaseTest {
         loginPage
                 .login(secretaryCommissionLogin, secretaryCommissionPassword)
                 .closeNotificationWindow()
-                .userNameShouldHave(secretaryCommissionName);
+                .userNameShouldHave(secretaryCommissionName)
+                .menuItemShouldBeVisible("Квалификационный экзамен")
+                .menuItemShouldBeVisible("Подтверждение квалификации")
+                .menuItemShouldNotVisible("Ведение реестра сертификатов")
+                .menuItemShouldNotVisible("Курирование деятельности по сертификации")
+                .menuItemShouldNotVisible("Подготовка базы данных знаний")
+                .menuItemShouldNotVisible("Администрирование");
     }
 
     @Description("Войти в приложение под ролью 'Член КК'. Проверить после входа в приложение: наличие пункта меню с именем текущего пользователя; наличие пунктов горизонтального меню, соответствующих роли")
@@ -72,7 +96,13 @@ public class LoginTest extends BaseTest {
         loginPage
                 .login(memberCommissionLogin, memberCommissionPassword)
                 .closeNotificationWindow()
-                .userNameShouldHave(memberCommissionName);
+                .userNameShouldHave(memberCommissionName)
+                .menuItemShouldBeVisible("Квалификационный экзамен")
+                .menuItemShouldBeVisible("Подтверждение квалификации")
+                .menuItemShouldNotVisible("Ведение реестра сертификатов")
+                .menuItemShouldNotVisible("Курирование деятельности по сертификации")
+                .menuItemShouldBeVisible("Подготовка базы данных знаний")
+                .menuItemShouldNotVisible("Администрирование");
     }
 
     @Description("Сделать попытку входа в приложение с пустым полем ввода логина")
