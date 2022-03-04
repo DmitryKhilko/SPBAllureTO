@@ -16,6 +16,12 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 @Log4j2
 public abstract class BaseTest {
 
+    public String superuserLogin, superuserPassword, superuserName;
+    public String adminLogin, adminPassword, adminName;
+    public String specialistMinfinLogin, specialistMinfinPassword, specialistMinfinName;
+    public String memberCommissionLogin, memberCommissionPassword, memberCommissionName;
+    public String secretaryCommissionLogin, secretaryCommissionPassword, secretaryCommissionName;
+
     public LoginPage loginPage;
     public MailboxInboxPage mailboxInboxPage;
     public HeaderPage headerPage;
@@ -23,7 +29,7 @@ public abstract class BaseTest {
     @Parameters({"BROWSER"})
     @BeforeMethod(description = "Настроить и открыть браузер") //предусловие
     public void setUp(@Optional("chrome") String browser, ITestContext context, ITestResult result){
-        log.info("Тест " + result.getMethod().getMethodName() + ": запустить выполнение теста в браузере '" + browser + "'"); //TODO Как отключить логирование
+        log.info("Тест " + result.getMethod().getMethodName() + ": запустить выполнение теста в браузере '" + browser + "'");
         switch (browser) {
             case "chrome":
                 Configuration.browser = "chrome";
@@ -44,9 +50,38 @@ public abstract class BaseTest {
 
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false)); //Для взаимодействия Selenide и Allure (https://ru.selenide.org/documentation/reports.html#allure-report)
 
-//        email = System.getenv().getOrDefault("TESTRAIL_EMAIL", PropertyReader.getProperty("testrail.email")); //команда, берущая значение для переменной или с настроек CI (TESTRAIL_EMAIL) или из настройки testrail.email файла config.properties
-//        password = System.getenv().getOrDefault("TESTRAIL_PASSWORD", PropertyReader.getProperty("testrail.password")); //команда, берущая значение для переменной или с настроек CI (TESTRAIL_PASSWORD) или из настройки testrail.password файла config.properties
-//        userName = System.getenv().getOrDefault("TESTRAIL_USERNAME", PropertyReader.getProperty("testrail.username")); //команда, берущая значение для переменной или с настроек CI (TESTRAIL_USERNAME) или из настройки testrail.username файла config.properties
+        //Разобраться, как преобразовать PropertyReader, чтобы он мог обрабатывать кириллицу (описание проблемы в файле "Описание проекта SPB.docx")
+        //Временное решение, пока не разберусь с кодировкой config.propertys - параметры с кириллицей объявить как переменные
+        superuserLogin = System.getenv().getOrDefault("SPB_SUPERUSERLOGIN", PropertyReader.getProperty("spb.superuserLogin")); //команда, берущая значение для переменной или для настроек CI (SPB_SUPERUSERLOGIN) из настройки spb.superuserLogin файла config.properties
+        superuserPassword = System.getenv().getOrDefault("SPB_SUPERUSERPASSWORD", PropertyReader.getProperty("spb.superuserPassword"));
+        //superuserName = System.getenv().getOrDefault("SPB_SUPERUSERNAME", PropertyReader.getProperty("spb.superuserName"));
+        superuserName = "Хилько Т.Ю.";
+
+        adminLogin = System.getenv().getOrDefault("SPB_ADMINLOGIN", PropertyReader.getProperty("spb.adminLogin"));
+        adminPassword = System.getenv().getOrDefault("SPB_ADMINPASSWORD", PropertyReader.getProperty("spb.adminPassword"));
+        //adminName = System.getenv().getOrDefault("SPB_ADMINNAME", PropertyReader.getProperty("spb.adminName"));
+        adminName = "Петров П.П.";
+
+        specialistMinfinLogin = System.getenv().getOrDefault("SPB_SPECIALISTMINFINLOGIN", PropertyReader.getProperty("spb.specialistMinfinLogin"));
+        specialistMinfinPassword = System.getenv().getOrDefault("SPB_SPECIALISTMINFINPASSWORD", PropertyReader.getProperty("spb.specialistMinfinPassword"));
+        //specialistMinfinName = System.getenv().getOrDefault("SPB_SPECIALISTMINFINNAME", PropertyReader.getProperty("spb.specialistMinfinName"));
+        specialistMinfinName = "Самохина И.В.";
+
+        secretaryCommissionLogin = System.getenv().getOrDefault("SPB_SECRETARYCOMMISSIONLOGIN", PropertyReader.getProperty("spb.secretaryCommissionLogin"));
+        secretaryCommissionPassword = System.getenv().getOrDefault("SPB_SECRETARYCOMMISSIONPASSWORD", PropertyReader.getProperty("spb.secretaryCommissionPassword"));
+        //secretaryCommissionName = System.getenv().getOrDefault("SPB_SECRETARYCOMMISSIONNAME", PropertyReader.getProperty("spb.secretaryCommissionName"));
+        secretaryCommissionName = "Свиридова Н.И.";
+
+        memberCommissionLogin = System.getenv().getOrDefault("SPB_MEMBERCOMMISSIONLOGIN", PropertyReader.getProperty("spb.memberCommissionLogin"));
+        memberCommissionPassword = System.getenv().getOrDefault("SPB_MEMBERCOMMISSIONPASSWORD", PropertyReader.getProperty("spb.memberCommissionPassword"));
+        //memberCommissionName = System.getenv().getOrDefault("SPB_MEMBERCOMMISSIONNAME", PropertyReader.getProperty("spb.memberCommissionName"));
+        memberCommissionName = "Савина Т.Н.";
+
+
+
+
+
+
 
         context.setAttribute("testName", result.getMethod().getMethodName()); //передаем имя выполняемого теста в методы тестового фреймворка для наглядного формирования логов
 

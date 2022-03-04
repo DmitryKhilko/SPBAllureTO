@@ -11,9 +11,9 @@ import static com.codeborne.selenide.Selenide.$;
 @Log4j2
 public abstract class BasePage {
 
-    //Адреса веб-страниц приложения
-    public static final String BASE_URL = System.getenv().getOrDefault("TESTRAIL_BASEURL", PropertyReader.getProperty("spb.baseurl"));
-    public static final String LOGIN_PAGE_URL = "/accountants/login";
+    //Адреса веб-страниц приложения, берущиеся из параметров CI или файла config.property
+    public static final String BASE_URL = System.getenv().getOrDefault("SPB_BASEURL", PropertyReader.getProperty("spb.baseurl"));
+    public static final String LOGIN_PAGE_URL = System.getenv().getOrDefault("SPB_LOGINPAGEURL", PropertyReader.getProperty("spb.loginpageurl"));
 
     //Элементы информационных окошек
     public SelenideElement closeButtonNotificationWindow = $(By.xpath("//div[contains(@class,'notification')]/a"));

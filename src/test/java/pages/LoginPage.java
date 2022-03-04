@@ -39,22 +39,6 @@ public class LoginPage extends BasePage {
         return this; //возвращаем текущую страницу
     }
 
-//    @Step("Ввести логин, пароль и войти в приложение")
-//    public HeaderPage loginNew(String userName, String userPassword) {
-//        log.debug("Тест " + context.getAttribute("testName") + ": ввести в поле ввода логина значение '" + userName + "'");
-//        loginInput.clear(); //сначала очищаем поле
-//        loginInput.setValue(userName); //потом вводим текст
-//
-//        log.debug("Тест " + context.getAttribute("testName") + ": ввести в поле ввода пароля значение '" + userPassword + "'");
-//        passwordInput.clear(); //сначала очищаем поле
-//        passwordInput.setValue(userPassword); //потом вводим текст
-//
-//        log.debug("Тест " + context.getAttribute("testName") + ": нажать кнопку '" + loginButton.getText() + "' для входа в приложение");
-//        loginButton.click(); //нажимаем на кнопку Log In
-//
-//        return new HeaderPage(context); //Инициализуем страницу, на которую переходим
-//    }
-
     @Step("Ввести логин, пароль и войти в приложение")
     public HeaderPage login(String userName, String userPassword) {
         log.debug("Тест " + context.getAttribute("testName") + ": ввести в поле ввода логина значение '" + userName + "'");
@@ -89,6 +73,4 @@ public class LoginPage extends BasePage {
         descriptionNotificationWindow.shouldHave(exactText(message));
         return this; //возвращаем текущую страницу
     }
-
-
 }

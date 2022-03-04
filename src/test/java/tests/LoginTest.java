@@ -12,12 +12,12 @@ import tests.base.BaseTest;
 // Позитивный тест
 // 1. Войти в приложение (логин валидный; пароль валидный). Вход осуществить для: суперпользователя; Администратора; Сотрудника Минфина; Секретаря КК; члена КК
 // Негативные тесты. Роль - суперпользователь
-// 2. Войти в приложение (логин пустой; пароль валидный)
-// 3. Войти в приложение (логин валидный; пароль пустой)
-// 4. Войти в приложение (логин невалидный; пароль валидный)
-// 5. Войти в приложение (логин валидный; пароль невалидный)
-// 6. Войти в приложение (3 раза подряд; логин невалидный; пароль валидный). Проверка блокировки пользователя
-// 7. Войти в приложение (3 раза подряд; логин валидный; пароль невалидный). Проверка блокировки пользователя
+// 2. Войти в приложение (логин пустой; пароль валидный). Роль - суперпользователь.
+// 3. Войти в приложение (логин валидный; пароль пустой). Роль - суперпользователь.
+// 4. Войти в приложение (логин невалидный; пароль валидный). Роль - суперпользователь.
+// 5. Войти в приложение (логин валидный; пароль невалидный). Роль - суперпользователь.
+// 6. Войти в приложение (3 раза подряд; логин невалидный; пароль валидный). Роль - суперпользователь. Проверка блокировки пользователя
+// 7. Войти в приложение (3 раза подряд; логин валидный; пароль невалидный). Роль - суперпользователь. Проверка блокировки пользователя
 //**************************************************************************************************************************************************************
 
 @Log4j2
@@ -30,49 +30,83 @@ public class LoginTest extends BaseTest {
                 .pageTitleShouldHave("Авторизация");
     }
 
-    //Добавить @DataProvider для подстановки в данный тест 4-х видов пользователей
-
-    @Description("Войти в приложение. Проверить после входа в приложение наличие пункта меню с именем текущего пользователя") //описание теста в Allure
-    @Test(priority = 1, description = "Войти в приложение (логин валидный; пароль валидный)")//приоритет теста, название теста в Allure
-    public void loginValidUsernameAndPassword(ITestContext context) {
+    @Description("Войти в приложение под ролью 'Суперпользователь'. Проверить после входа в приложение: наличие пункта меню с именем текущего пользователя; наличие пунктов горизонтального меню, соответствующих роли") //описание теста в Allure
+    @Test(priority = 1, description = "Войти в приложение под ролью 'Суперпользователь' (логин валидный; пароль валидный)") //приоритет теста, название теста в Allure
+    public void loginValidUsernameAndPassword_SuperUser(ITestContext context) {
         loginPage
-                .login("hitan@mail.ru","Hh111111111")
+                .login(superuserLogin, superuserPassword)
                 .closeNotificationWindow()
-                .userNameShouldHave("Хилько Т.Ю.");
+                .userNameShouldHave(superuserName);
+    }
+
+    @Description("Войти в приложение под ролью 'Администратор'. Проверить после входа в приложение: наличие пункта меню с именем текущего пользователя; наличие пунктов горизонтального меню, соответствующих роли")
+    @Test(priority = 2, description = "Войти в приложение под ролью 'Администратор' (логин валидный; пароль валидный)")
+    public void loginValidUsernameAndPassword_Admin(ITestContext context) {
+        loginPage
+                .login(adminLogin, adminPassword)
+                .closeNotificationWindow()
+                .userNameShouldHave(adminName);
+    }
+
+    @Description("Войти в приложение под ролью 'Специалист Минфина'. Проверить после входа в приложение: наличие пункта меню с именем текущего пользователя; наличие пунктов горизонтального меню, соответствующих роли")
+    @Test(priority = 3, description = "Войти в приложение под ролью 'Специалист Минфина' (логин валидный; пароль валидный)")
+    public void loginValidUsernameAndPassword_specialistMinfin(ITestContext context) {
+        loginPage
+                .login(specialistMinfinLogin, specialistMinfinPassword)
+                .closeNotificationWindow()
+                .userNameShouldHave(specialistMinfinName);
+    }
+
+    @Description("Войти в приложение под ролью 'Секретарь КК'. Проверить после входа в приложение: наличие пункта меню с именем текущего пользователя; наличие пунктов горизонтального меню, соответствующих роли")
+    @Test(priority = 4, description = "Войти в приложение под ролью 'Секретарь КК' (логин валидный; пароль валидный)")
+    public void loginValidUsernameAndPassword_secretaryCommission(ITestContext context) {
+        loginPage
+                .login(secretaryCommissionLogin, secretaryCommissionPassword)
+                .closeNotificationWindow()
+                .userNameShouldHave(secretaryCommissionName);
+    }
+
+    @Description("Войти в приложение под ролью 'Член КК'. Проверить после входа в приложение: наличие пункта меню с именем текущего пользователя; наличие пунктов горизонтального меню, соответствующих роли")
+    @Test(priority = 5, description = "Войти в приложение под ролью 'Член КК' (логин валидный; пароль валидный)")
+    public void loginValidUsernameAndPassword_memberCommission(ITestContext context) {
+        loginPage
+                .login(memberCommissionLogin, memberCommissionPassword)
+                .closeNotificationWindow()
+                .userNameShouldHave(memberCommissionName);
     }
 
     @Description("Сделать попытку входа в приложение с пустым полем ввода логина")
-    @Test(priority = 2, description = "Войти в приложение (логин пустой; пароль валидный)")
-    public void loginEmptyUsernameAndValidPassword(ITestContext context) {
+    @Test(priority = 6, description = "Войти в приложение под ролью 'Суперпользователь' (логин пустой; пароль валидный)")
+    public void loginEmptyUsernameAndValidPassword_SuperUser(ITestContext context) {
         loginPage
-               .login("","Hh111111111");
+                .login("", superuserPassword);
         loginPage
                 .loginErrorMessageShouldHave("Поле обязательно!");
     }
 
     @Description("Сделать попытку входа в приложение с пустым полем ввода пароля")
-    @Test(priority = 3, description = "Войти в приложение (логин валидный; пароль пустой)")
-    public void loginValidUsernameAndEmptyPassword(ITestContext context) {
+    @Test(priority = 7, description = "Войти в приложение под ролью 'Суперпользователь' (логин валидный; пароль пустой)")
+    public void loginValidUsernameAndEmptyPassword_SuperUser(ITestContext context) {
         loginPage
-                .login("hitan@mail.ru","");
+                .login(superuserLogin, "");
         loginPage
                 .passwordErrorMessageShouldHave("Поле обязательно!");
     }
 
     @Description("Сделать попытку входа в приложение с некорректным значением логина")
-    @Test(priority = 4, description = "Войти в приложение (логин невалидный; пароль валидный)")
-    public void loginInvalidUsernameAndValidPassword(ITestContext context) {
+    @Test(priority = 8, description = "Войти в приложение под ролью 'Суперпользователь' (логин невалидный; пароль валидный)")
+    public void loginInvalidUsernameAndValidPassword_SuperUser(ITestContext context) {
         loginPage
-                .login("123","Hh111111111");
+                .login("123", superuserPassword);
         loginPage
                 .descriptionNotificationWindowShouldHave("Ошибка авторизации: Неправильный логин или пароль");
     }
 
     @Description("Сделать попытку входа в приложение с некорректным значением пароля")
-    @Test(priority = 4, description = "Войти в приложение (логин валидный; пароль невалидный)")
-    public void loginValidUsernameAndInvalidPassword(ITestContext context) {
+    @Test(priority = 9, description = "Войти в приложение под ролью 'Суперпользователь' (логин валидный; пароль невалидный)")
+    public void loginValidUsernameAndInvalidPassword_SuperUser(ITestContext context) {
         loginPage
-                .login("hitan@mail.ru","123");
+                .login(superuserLogin, "123");
         loginPage
                 .descriptionNotificationWindowShouldHave("Ошибка авторизации: Неправильный логин или пароль");
     }
