@@ -12,6 +12,8 @@ import pages.base.BasePage;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
+import static pages.base.URLs.BASE_URL;
+import static pages.base.URLs.LOGIN_PAGE_URL;
 
 @Log4j2
 public class LoginPage extends BasePage {

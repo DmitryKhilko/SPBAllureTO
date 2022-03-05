@@ -73,7 +73,7 @@ public class HeaderPage extends BasePage {
     @Step("Проверить в подменю горизонтального меню (расположенного в пункте '...') отсутствие пункта '{menuItemName}'")
     public HeaderPage submenuItemShouldNotVisible(String menuItemName) {
         // в методе userNameShouldHave уже кликается по '...', чтобы раскрыть вложенное меню, в данном методе по '...' кликать не надо
-        log.debug("Тест " + context.getAttribute("testName") + ": проверить в подменю (скрытого '...') горизонтального меню отсутствие пункта '" + menuItemName + "'");
+        log.debug("Тест " + context.getAttribute("testName") + ": проверить в подменю горизонтального меню (расположенного в пункте '...') отсутствие пункта '" + menuItemName + "'");
         $(By.xpath(String.format(menuItemInvisibleLocator, menuItemName))).shouldNot(visible);
         return this; //возвращаем текущую страницу
     }

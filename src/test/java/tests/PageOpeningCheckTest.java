@@ -7,6 +7,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import tests.base.BaseTest;
 
+import static pages.base.BasePage.loginPageTitle;
+
 @Log4j2
 public class PageOpeningCheckTest extends BaseTest {
 
@@ -14,7 +16,7 @@ public class PageOpeningCheckTest extends BaseTest {
     public void precondition(ITestContext context) {
         loginPage
                 .openPage()
-                .pageTitleShouldHave("Авторизация");
+                .pageTitleShouldHave(loginPageTitle);
     }
 
     @Description("Войти в приложение под ролью 'Суперпользователь'. Проверить после входа в приложение: работоспособность пунктов меню (подменю)") //описание теста в Allure
