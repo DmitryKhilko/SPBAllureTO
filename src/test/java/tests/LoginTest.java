@@ -19,6 +19,8 @@ public class LoginTest extends BaseTest {
                 .pageTitleShouldHave(loginPageTitle);
     }
 
+
+
     @Description("Войти в приложение под ролью 'Суперпользователь'. Проверить после входа в приложение: наличие пункта меню с именем текущего пользователя; наличие пунктов горизонтального меню, соответствующих роли") //описание теста в Allure
     @Test(priority = 1, description = "Войти в приложение под ролью 'Суперпользователь' (логин валидный; пароль валидный)") //приоритет теста, название теста в Allure
     public void loginValidUsernameAndPassword_SuperUser(ITestContext context) {
