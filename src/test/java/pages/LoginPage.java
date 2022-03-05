@@ -2,6 +2,7 @@ package pages;
 
 import com.codeborne.selenide.SelenideElement;
 import elements.Input;
+import elements.NotificationWindow;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
@@ -16,8 +17,6 @@ import static com.codeborne.selenide.Selenide.open;
 public class LoginPage extends BasePage {
 
     public SelenideElement loginPageTitle = $(By.xpath("//h1[@class='page-title']"));
-//    public SelenideElement loginInput = $(By.xpath("//input[contains(@id,'username')]"));
-//    public SelenideElement passwordInput = $(By.xpath("//input[contains(@id,'password')]"));
     public SelenideElement loginButton = $(By.xpath("//button[@type='submit']"));
 
     //Конструктор для передачи в команду log имени теста
@@ -70,7 +69,7 @@ public class LoginPage extends BasePage {
     @Step("Проверить, вывелось ли уведомление об ошибке '{message}' при некорректном значении логина или пароля")
     public LoginPage descriptionNotificationWindowShouldHave(String message) {
         log.debug("Тест " + context.getAttribute("testName") + ": проверить, вывелось ли уведомление об ошибке '" + message + "' при некорректном значении логина или пароля");
-        descriptionNotificationWindow.shouldHave(exactText(message));
+        new NotificationWindow().descriptionShouldHave(message);
         return this; //возвращаем текущую страницу
     }
 }

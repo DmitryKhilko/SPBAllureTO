@@ -4,7 +4,6 @@ import io.qameta.allure.Description;
 import lombok.extern.log4j.Log4j2;
 import org.testng.ITestContext;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import tests.base.BaseTest;
 

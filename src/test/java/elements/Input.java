@@ -3,7 +3,6 @@ package elements;
 import com.codeborne.selenide.SelenideElement;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
-import org.testng.ITestContext;
 
 import static com.codeborne.selenide.Selenide.$;
 
@@ -18,6 +17,7 @@ public class Input {
         this.label = label;
     }
 
+    //Метод, вводящий тест в Input
     public void write(String text) {
         $(By.xpath(String.format(inputLocator, this.label))).clear();
         $(By.xpath(String.format(inputLocator, this.label))).setValue(text);

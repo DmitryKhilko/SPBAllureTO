@@ -1,18 +1,16 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
+import elements.NotificationWindow;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.testng.ITestContext;
 import pages.base.BasePage;
 
-import java.time.Duration;
-
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
 
 @Log4j2
 public class HeaderPage extends BasePage {
@@ -30,8 +28,7 @@ public class HeaderPage extends BasePage {
     @Step("Дождаться появления окна уведомлений об успешном входе и закрыть его")
     public HeaderPage closeNotificationWindow() {
         log.debug("Тест " + context.getAttribute("testName") + ": дождаться появления окна уведомлений об успешном входе и закрыть его");
-        closeButtonNotificationWindow.shouldBe(visible);
-        closeButtonNotificationWindow.click();
+        new NotificationWindow().close();
         return this; //возвращаем текущую страницу
     }
 
@@ -73,23 +70,11 @@ public class HeaderPage extends BasePage {
         return this; //возвращаем текущую страницу
     }
 
-    @Step("Проверить в подменю (скрытого '...') горизонтального меню отсутствие пункта '{menuItemName}'")
+    @Step("Проверить в подменю горизонтального меню (расположенного в пункте '...') отсутствие пункта '{menuItemName}'")
     public HeaderPage submenuItemShouldNotVisible(String menuItemName) {
         // в методе userNameShouldHave уже кликается по '...', чтобы раскрыть вложенное меню, в данном методе по '...' кликать не надо
         log.debug("Тест " + context.getAttribute("testName") + ": проверить в подменю (скрытого '...') горизонтального меню отсутствие пункта '" + menuItemName + "'");
         $(By.xpath(String.format(menuItemInvisibleLocator, menuItemName))).shouldNot(visible);
         return this; //возвращаем текущую страницу
     }
-
-
-
-
-
-
-
-
-
-
-
-
 }

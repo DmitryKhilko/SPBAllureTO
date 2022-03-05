@@ -11,6 +11,7 @@ import pages.HeaderPage;
 import pages.LoginPage;
 import pages.MailboxInboxPage;
 import utils.PropertyReader;
+
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 @Log4j2
@@ -28,7 +29,7 @@ public abstract class BaseTest {
 
     @Parameters({"BROWSER"})
     @BeforeMethod(description = "Настроить и открыть браузер") //предусловие
-    public void setUp(@Optional("chrome") String browser, ITestContext context, ITestResult result){
+    public void setUp(@Optional("chrome") String browser, ITestContext context, ITestResult result) {
         log.info("Тест " + result.getMethod().getMethodName() + ": запустить выполнение теста в браузере '" + browser + "'");
         switch (browser) {
             case "chrome":
@@ -76,12 +77,6 @@ public abstract class BaseTest {
         memberCommissionPassword = System.getenv().getOrDefault("SPB_MEMBERCOMMISSIONPASSWORD", PropertyReader.getProperty("spb.memberCommissionPassword"));
         //memberCommissionName = System.getenv().getOrDefault("SPB_MEMBERCOMMISSIONNAME", PropertyReader.getProperty("spb.memberCommissionName"));
         memberCommissionName = "Савина Т.Н.";
-
-
-
-
-
-
 
         context.setAttribute("testName", result.getMethod().getMethodName()); //передаем имя выполняемого теста в методы тестового фреймворка для наглядного формирования логов
 
