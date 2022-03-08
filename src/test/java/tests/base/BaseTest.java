@@ -10,6 +10,7 @@ import org.testng.annotations.*;
 import pages.HeaderPage;
 import pages.LoginPage;
 import pages.MailboxInboxPage;
+import pages.PortalPage;
 import utils.PropertyReader;
 
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
@@ -22,10 +23,13 @@ public abstract class BaseTest {
     public String specialistMinfinLogin, specialistMinfinPassword, specialistMinfinName;
     public String memberCommissionLogin, memberCommissionPassword, memberCommissionName;
     public String secretaryCommissionLogin, secretaryCommissionPassword, secretaryCommissionName;
+    public String employeeTCMinfinLogin, employeeTCMinfinPassword, employeeTCMinfinName;
 
     public LoginPage loginPage;
     public MailboxInboxPage mailboxInboxPage;
     public HeaderPage headerPage;
+    public PortalPage portalPage;
+
 
     @Parameters({"BROWSER"})
     @BeforeMethod(description = "Настроить и открыть браузер") //предусловие
@@ -78,12 +82,20 @@ public abstract class BaseTest {
         //memberCommissionName = System.getenv().getOrDefault("SPB_MEMBERCOMMISSIONNAME", PropertyReader.getProperty("spb.memberCommissionName"));
         memberCommissionName = "Савина Т.Н.";
 
+        employeeTCMinfinLogin = System.getenv().getOrDefault("SPB_EMPLOYEETCMINFINLOGIN", PropertyReader.getProperty("spb.employeeTCMinfinLogin"));
+        employeeTCMinfinPassword = System.getenv().getOrDefault("SPB_EMPLOYEETCMINFINPASSWORD", PropertyReader.getProperty("spb.employeeTCMinfinPassword"));
+        //employeeTCMinfinName = System.getenv().getOrDefault("SPB_EMPLOYEETCMINFINNAME", PropertyReader.getProperty("spb.employeeTCMinfinName"));
+        employeeTCMinfinName = "Соловьева Т.М.";
+
+
+
         context.setAttribute("testName", result.getMethod().getMethodName()); //передаем имя выполняемого теста в методы тестового фреймворка для наглядного формирования логов
 
         //Инициализация страниц (которые описаны в пакете pages), с которыми мы будем работать в тестах
         loginPage = new LoginPage(context);
         mailboxInboxPage = new MailboxInboxPage(context);
         headerPage = new HeaderPage(context);
+        portalPage = new PortalPage(context);
     }
 
     @AfterMethod(alwaysRun = true, description = "Закрыть браузер") //постусловие

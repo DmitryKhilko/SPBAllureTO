@@ -12,14 +12,14 @@ import pages.base.BasePage;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
-import static pages.base.URLs.BASE_URL;
-import static pages.base.URLs.LOGIN_PAGE_URL;
+import static pages.base.ConstantsUI.*;
+import static pages.base.URLs.*;
 
 @Log4j2
 public class LoginPage extends BasePage {
 
     public SelenideElement loginPageTitle = $(By.xpath("//h1[@class='page-title']"));
-    public SelenideElement loginButton = $(By.xpath("//button[@type='submit']"));
+    //public SelenideElement loginButton = $(By.xpath("//button[@type='submit']"));
 
     //Конструктор для передачи в команду log имени теста
     public LoginPage(ITestContext context) {
@@ -43,28 +43,25 @@ public class LoginPage extends BasePage {
     @Step("Ввести логин, пароль и войти в приложение")
     public HeaderPage login(String userName, String userPassword) {
         log.debug("Тест " + context.getAttribute("testName") + ": ввести в поле ввода логина значение '" + userName + "'");
-        new Input("Логин").write(userName);
-
+        new Input(LOGIN_LABEL).write(userName);
         log.debug("Тест " + context.getAttribute("testName") + ": ввести в поле ввода пароля значение '" + userPassword + "'");
-        new Input("Пароль").write(userPassword);
-
+        new Input(PASSWORD_LABEL).write(userPassword);
         log.debug("Тест " + context.getAttribute("testName") + ": нажать кнопку '" + loginButton.getText() + "' для входа в приложение");
-        loginButton.click(); //нажимаем на кнопку Log In
-
+        loginButton.click(); //нажимаем на кнопку "Войдите"
         return new HeaderPage(context); //Инициализуем страницу, на которую переходим
     }
 
     @Step("Проверить, вывелось ли сообщение об ошибке '{message}' при пустом поле ввода логина")
     public LoginPage loginErrorMessageShouldHave(String message) {
         log.debug("Тест " + context.getAttribute("testName") + ": проверить, вывелось ли сообщение об ошибке '" + message + "' при пустом поле ввода логина");
-        new Input("Логин").inputErrorMessage().shouldHave(exactText(message));
+        new Input(LOGIN_LABEL).inputErrorMessage().shouldHave(exactText(message));
         return this; //возвращаем текущую страницу
     }
 
     @Step("Проверить, вывелось ли сообщение об ошибке '{message}' при пустом поле ввода пароля")
     public LoginPage passwordErrorMessageShouldHave(String message) {
         log.debug("Тест " + context.getAttribute("testName") + ": проверить, вывелось ли сообщение об ошибке '" + message + "' при пустом поле ввода пароля");
-        new Input("Пароль").inputErrorMessage().shouldHave(exactText(message));
+        new Input(PASSWORD_LABEL).inputErrorMessage().shouldHave(exactText(message));
         return this; //возвращаем текущую страницу
     }
 
