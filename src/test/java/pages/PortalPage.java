@@ -1,17 +1,17 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
-import elements.Input;
+import elements.Button;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.testng.ITestContext;
 import pages.base.BasePage;
 
-import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
-import static pages.base.ConstantsUI.*;
+import static pages.base.ConstantsUILogin.LOGIN_BUTTON;
+import static pages.base.ConstantsUIPortalLogin.*;
 import static pages.base.URLs.*;
 
 @Log4j2
@@ -46,8 +46,8 @@ public class PortalPage extends BasePage {
         log.debug("Тест " + context.getAttribute("testName") + ": ввести в поле ввода пароля значение '" + userPassword + "'");
         $(By.xpath(String.format(inputLoginModalLocator, PORTAL_PASSWORD_LABEL))).clear();
         $(By.xpath(String.format(inputLoginModalLocator, PORTAL_PASSWORD_LABEL))).setValue(userPassword);
-        log.debug("Тест " + context.getAttribute("testName") + ": нажать кнопку '" + loginButton.getText() + "' для входа на портал");
-        loginButton.click(); //нажимаем на кнопку "Войдите"
+        log.debug("Тест " + context.getAttribute("testName") + ": нажать кнопку '" + PORTAL_LOGIN_BUTTON + "' для входа на портал");
+        new Button(PORTAL_LOGIN_BUTTON).clickButton(); //нажимаем на кнопку "Войдите"
         return this; //возвращаем текущую страницу
     }
 

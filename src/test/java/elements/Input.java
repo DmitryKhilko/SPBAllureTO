@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Selenide.$;
 @Log4j2
 public class Input {
 
-    String inputLocator = "//label[contains(@title,'%s')]/ancestor::div[contains(@class, 'ant-row ant-form-item')]//input[contains(@class, 'ant-input')]";
+    String inputLocator = "//label[@title='%s']/ancestor::div[contains(@class, 'ant-row ant-form-item')]//input[contains(@class, 'ant-input')]";
     String inputErrorMessageLocator = "//label[contains(@title,'%s')]/ancestor::div[contains(@class, 'ant-row ant-form-item')]//div[@class='ant-form-explain']"; //если не заполнен Input под ним сообщение появляется
     String label;
 

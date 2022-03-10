@@ -1,6 +1,7 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
+import elements.Button;
 import elements.Input;
 import elements.NotificationWindow;
 import io.qameta.allure.Step;
@@ -12,7 +13,7 @@ import pages.base.BasePage;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
-import static pages.base.ConstantsUI.*;
+import static pages.base.ConstantsUILogin.*;
 import static pages.base.URLs.*;
 
 @Log4j2
@@ -46,8 +47,8 @@ public class LoginPage extends BasePage {
         new Input(LOGIN_LABEL).write(userName);
         log.debug("Тест " + context.getAttribute("testName") + ": ввести в поле ввода пароля значение '" + userPassword + "'");
         new Input(PASSWORD_LABEL).write(userPassword);
-        log.debug("Тест " + context.getAttribute("testName") + ": нажать кнопку '" + loginButton.getText() + "' для входа в приложение");
-        loginButton.click(); //нажимаем на кнопку "Войдите"
+        log.debug("Тест " + context.getAttribute("testName") + ": нажать кнопку '" + LOGIN_BUTTON + "' для входа в приложение");
+        new Button(LOGIN_BUTTON).clickButton();
         return new HeaderPage(context); //Инициализуем страницу, на которую переходим
     }
 

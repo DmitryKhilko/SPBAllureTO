@@ -2,14 +2,14 @@ package tests;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
-import io.qameta.allure.TmsLink;
 import lombok.extern.log4j.Log4j2;
 import org.testng.ITestContext;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import tests.base.BaseTest;
 
-import static pages.base.ConstantsUI.*;
+import static pages.base.ConstantsUILogin.*;
+import static pages.base.ConstantsUIMenu.*;
 
 @Log4j2
 public class LoginTest extends BaseTest {

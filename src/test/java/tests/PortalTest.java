@@ -7,8 +7,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import tests.base.BaseTest;
 
-import static pages.base.ConstantsUI.*;
-import static pages.base.ConstantsUI.VMENU_0506_TITLE;
+import static pages.base.ConstantsUIPortalLogin.*;
 
 @Log4j2
 public class PortalTest extends BaseTest {

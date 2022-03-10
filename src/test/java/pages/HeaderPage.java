@@ -17,6 +17,9 @@ import static com.codeborne.selenide.Selenide.$;
 @Log4j2
 public class HeaderPage extends BasePage {
 
+    //***************************************************************************************************************************************
+    //Локаторы страницы
+    //***************************************************************************************************************************************
     public SelenideElement appTitleButton= $(By.xpath("//div[contains(@class,'app-title')]")); //заголовок приложения (в левом верхнем углу)
     public SelenideElement horizontalSubmenuItem = $(By.xpath("//li[contains(@class,'ant-menu-submenu-selected')]//span[contains(text(),'···')]")); // '...' - за которым скрываются непомещающиеся пункты меню
 
