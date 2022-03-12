@@ -30,7 +30,7 @@ public abstract class BasePage {
         LocalDateTime dateTime = LocalDateTime.now(); // Gets the current date and time
         //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
         //TODO На данный момент время на тестовом сервере отстает на 1,5 минуты, поэтому проверка времени сейчас вообще невозможна. После настройки тестового сервера можно кроме даты проверять еще и 'HH:mm'б секунды - врядли
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
         return dateTime.format(formatter);
     }
 }

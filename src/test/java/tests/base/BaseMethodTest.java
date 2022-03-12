@@ -12,7 +12,6 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import pages.HeaderPage;
 import pages.LoginPage;
-import pages.MailboxInboxPage;
 import pages.PortalPage;
 
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
@@ -21,7 +20,6 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 public abstract class BaseMethodTest {
 
     public LoginPage loginPage;
-    public MailboxInboxPage mailboxInboxPage;
     public HeaderPage headerPage;
     public PortalPage portalPage;
 
@@ -53,7 +51,6 @@ public abstract class BaseMethodTest {
 
         //Инициализация страниц, описанные в пакете pages, с которыми производится работа в тестах
         loginPage = new LoginPage(context);
-        mailboxInboxPage = new MailboxInboxPage(context);
         headerPage = new HeaderPage(context);
         portalPage = new PortalPage(context);
     }

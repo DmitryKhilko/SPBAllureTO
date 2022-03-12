@@ -85,7 +85,7 @@ public class AteDictionaryPage extends BasePage {
 
     @Step("Удалить АТЕ")
     public AteDictionaryPage deleteATE(String indexRow) {
-        log.debug("Тест " + context.getAttribute("testName") + ": нажать кнопку 'Редактировать' в строке таблицы для редактирования АТЕ");
+        log.debug("Тест " + context.getAttribute("testName") + ": нажать кнопку 'Удалить' в строке таблицы для удаления АТЕ");
         new Table(indexRow, "delete").clickCellButton();
         log.debug("Тест " + context.getAttribute("testName") + ": нажать кнопку 'Да' всплывающего окошка 'Вы уверены?'");
         new Table("Да").clickConfirmButton();

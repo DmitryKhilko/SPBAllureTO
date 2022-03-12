@@ -17,7 +17,7 @@ import static tests.base.Users.*;
 //План тестирования:
 // 1. Создать новый АТЕ со значениями согласно попарного тестирования. С помощью фильтра отобрать созданный АТЕ (задействовав сразу все поля фильтра) - убедится, что значение добавилось
 // TODO 2. Сделать попытку создания дубликата АТЕ с валидными значениями (не должно пропустить) - контроль дубликатов не реализован в данном справочнике в КЗ СПБ
-// 3. Изменить созданный АТЕ (все поля). С помощью фильтра отобрать измененный АТЕ (задействовав сразу все поля фильтра) - убедится, что значение изменилось
+// 3. Изменить созданный АТЕ (все поля). C помощью фильтра отобрать измененный АТЕ (задействовав сразу все поля фильтра) - убедится, что значение изменилось
 // 4. Удалить измененный АТЕ. С помощью фильтра сделать попытку отобрать удаленный АТЕ (задействовав сразу все поля фильтра) - убедится, что значение не найдено
 // TODO 5. Произвести попытку создания нового АТЕ с невалидными значения
 // TODO 6. Произвести попытку редактирования АТЕ с невалидными значениями
@@ -27,7 +27,7 @@ import static tests.base.Users.*;
 public class AteDictionaryCRUDTest extends BaseClassTest {
 
     @Description("Создать новый АТЕ с валидными значениями параметров. Создание произвести под ролью 'Администратор', как наиболее характерной для добавления АТЕ") //описание теста в Allure
-    @Test(priority = 20, description = "Создать новый АТЕ (валидные значения)") //приоритет теста, название теста в Allure
+    @Test(priority = 1, description = "Создать новый АТЕ (валидные значения)") //приоритет теста, название теста в Allure
     public void createATE_admin(ITestContext context) throws InterruptedException, IOException {
          loginPage
                 .openPage()
@@ -36,7 +36,7 @@ public class AteDictionaryCRUDTest extends BaseClassTest {
         ateDictionaryPage
                 .openPage();
 
-        log.debug("Тест " + context.getAttribute("testName") + ": добавить ожидание, чтобы после перехода на страницу в фоне сформировался список наименований родителей с целью последующего выбора из данного списка при добавлении нового АТЕ");
+        log.debug("Тест " + context.getAttribute("testName") + ": добавить ожидание, чтобы после перехода на страницу в фоне сформировался список наименований родителей с целью последующего выбора из данного списка при создании нового АТЕ");
         Thread.sleep(1500);
 
         ateDictionaryPage
@@ -52,12 +52,12 @@ public class AteDictionaryCRUDTest extends BaseClassTest {
                 .tableCellValueShouldHave("0", 1, newAte.getParentName())
                 .tableCellValueShouldHave("0", 2, newAte.getName())
                 .tableCellValueShouldHave("0", 3, newAte.getGovernment())
-                .tableCellValueShouldHave("0", 4, createDateTime)
+                .tableCellValueShouldHave("0", 4, createATEDateTime)
                 .tableCellValueShouldHave("0", 5, adminLogin);
     }
 
     @Description("Произвести редактирование АТЕ с валидными значениями параметров. Редактирование произвести под ролью 'Администратор', как наиболее характерной для редактирования АТЕ")
-    @Test(priority = 21, description = "Отредактировать АТЕ (валидные значения)")
+    @Test(priority = 2, description = "Отредактировать АТЕ (валидные значения)")
     public void updateATE_admin(ITestContext context) throws InterruptedException, IOException {
 
         log.debug("Тест " + context.getAttribute("testName") + ": добавить ожидание, чтобы после перехода на страницу в фоне сформировался список наименований родителей с целью последующего выбора из данного списка при редактировании АТЕ");
@@ -82,7 +82,7 @@ public class AteDictionaryCRUDTest extends BaseClassTest {
     }
 
     @Description("Произвести удаление АТЕ. Удаление произвести под ролью 'Администратор', как наиболее характерной для удаления АТЕ")
-    @Test(priority = 22, description = "Удалить АТЕ")
+    @Test(priority = 3, description = "Удалить АТЕ")
     public void deleteATE_admin(ITestContext context) {
 
         ateDictionaryPage

@@ -8,20 +8,19 @@ import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 import pages.*;
-import pages.dictionary.AteDictionaryCreatePage;
-import pages.dictionary.AteDictionaryFilterPage;
-import pages.dictionary.AteDictionaryPage;
-import pages.dictionary.AteDictionaryUpdatePage;
+import pages.dictionary.*;
 
 @Log4j2
 public abstract class BaseClassTest {
 
     public LoginPage loginPage;
-    public MailboxInboxPage mailboxInboxPage;
     public AteDictionaryPage ateDictionaryPage;
     public AteDictionaryCreatePage ateDictionaryCreatePage;
     public AteDictionaryUpdatePage ateDictionaryUpdatePage;
     public AteDictionaryFilterPage ateDictionaryFilterPage;
+    public CertificateChangeCauseDictionaryPage certificateChangeCauseDictionaryPage;
+    public CertificateChangeCauseDictionaryCreatePage certificateChangeCauseDictionaryCreatePage;
+    public CertificateChangeCauseDictionaryUpdatePage certificateChangeCauseDictionaryUpdatePage;
 
     @Parameters({"BROWSER"})
     @BeforeClass(description = "Настроить и открыть браузер") //предусловие
@@ -49,11 +48,13 @@ public abstract class BaseClassTest {
 
         //Инициализация страниц, описанные в пакете pages, с которыми производится работа в тестах
         loginPage = new LoginPage(context);
-        mailboxInboxPage = new MailboxInboxPage(context);
         ateDictionaryPage = new AteDictionaryPage(context);
         ateDictionaryCreatePage = new AteDictionaryCreatePage(context);
         ateDictionaryUpdatePage = new AteDictionaryUpdatePage(context);
         ateDictionaryFilterPage = new AteDictionaryFilterPage(context);
+        certificateChangeCauseDictionaryPage = new CertificateChangeCauseDictionaryPage(context);
+        certificateChangeCauseDictionaryCreatePage = new CertificateChangeCauseDictionaryCreatePage(context);
+        certificateChangeCauseDictionaryUpdatePage = new CertificateChangeCauseDictionaryUpdatePage(context);
     }
 
     @BeforeMethod(description = "Запустить выполнение теста") //предусловие

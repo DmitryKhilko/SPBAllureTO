@@ -1,9 +1,12 @@
 package elements;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.actions;
+
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.*;
 
 public class Table {
 
@@ -14,10 +17,12 @@ public class Table {
     String cellButtonLocator = "//tr[@index='%s']//td[@class='ant-table-fixed-columns-in-body action-column']//i[contains(@aria-label, '%s')]/ancestor::button"; //кнопки удаления и редактирования в n-й строке (//div[@class='ant-table-scroll']//tr[@index='0']//i[@aria-label='icon: edit'])
     String buttonConfirmDeletionLocator = "//div[@class='ant-popover-inner-content']//span[text()='%s']/ancestor::button"; //кнопки 'Да', 'Нет' всплывающего окошка "Вы уверены?", появляющегося после нажатия кнопки удаления в строке таблицы
     String tableEmptyDescriptionLocator = "//div[@class='ant-table-scroll']//p[@class='ant-empty-description']"; //если после фильтрации нет данных в таблице, в таблице отображается элемент 'Нет данных'
+    String tableSearchRemuveValueLocator = "//tbody[@class='ant-table-tbody']//div[text()='%s']"; //после удаления строки проверка удаления - отсутствия удаленного значения в таблице
     String indexRow; //номер строки таблицы
     int indexColumn; //номер столбца таблицы
     String action; //признак, какую кнопку выбирает пользователь в строке таблицы: карандаш (action = 'edit') или корзину (action = 'delete')
     String confirm; //признак, какую кнопку выбирает пользователь (confirm = 'Да' или confirm = 'Нет') во всплывающем окошке "Вы уверены?", появляющемся после нажатия кнопки удаления в строке таблицы
+    String name; //для поиска удаленного из таблицы названия
 
     //*****************************************************************************************************************************************************************************
     //Методы элемента
@@ -38,6 +43,7 @@ public class Table {
     public Table(String confirm) {
         this.confirm = confirm;
     }
+
     //Пустой конструктор для подстановки переменных в метод tableEmptyDescription()
     public Table() {
     }
@@ -62,5 +68,10 @@ public class Table {
     //Метод, возвращающий элемент индикации отсутствия записей в таблице - 'Нет данных'
     public SelenideElement tableEmptyDescription() {
         return $(By.xpath(tableEmptyDescriptionLocator));
+    }
+
+    //Метод проверяющий отсутствие в таблице удаленной строки (отсутствует в таблице искомое наименование)
+    public void tableDataShouldNotBeVisible() {
+        $(By.xpath(String.format(tableSearchRemuveValueLocator, this.name))).shouldNotBe(visible);
     }
 }
