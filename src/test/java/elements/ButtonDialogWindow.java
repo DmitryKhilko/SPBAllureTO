@@ -3,25 +3,23 @@ package elements;
 import org.openqa.selenium.By;
 import static com.codeborne.selenide.Selenide.$;
 
-public class InputDialogWindow {
-
+public class ButtonDialogWindow {
     //*****************************************************************************************************************************************************************************
     //Локаторы элемента; переменные, используемые в методах элемента
     //*****************************************************************************************************************************************************************************
-    String inputLocator = "//div[@class='ant-modal-content']//label[@title='%s']/ancestor::div[contains(@class, 'ant-row ant-form-item')]//input[contains(@class, 'ant-input')]"; //поля ввода диалоговых окон. Данные локатор отличается от иных полей ввода на div[@class='ant-modal-content']
-    String label;//название поля ввода
+    String buttonLocator = "//div[@class='ant-modal-content']//span[text()='%s']/ancestor::button"; // локатор кнопок 'OK', 'Отмена' диалогового окна
+    String buttonName; //название кнопки
 
     //*****************************************************************************************************************************************************************************
     //Методы элемента
     //*****************************************************************************************************************************************************************************
     //Конструктор для подстановки переменных в методы элемента
-    public InputDialogWindow(String label) {
-        this.label = label;
+    public ButtonDialogWindow(String buttonName) {
+        this.buttonName = buttonName;
     }
 
-    //Метод, вводящий тест в поле ввода
-    public void write(String text) {
-        $(By.xpath(String.format(inputLocator, this.label))).clear();
-        $(By.xpath(String.format(inputLocator, this.label))).setValue(text);
+    //Метод нажатия на кнопку
+    public void click() {
+        $(By.xpath(String.format(buttonLocator, this.buttonName))).click();
     }
 }

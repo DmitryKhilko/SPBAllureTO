@@ -1,36 +1,45 @@
 package elements;
 
 import com.codeborne.selenide.SelenideElement;
-import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
-
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.actions;
 
-@Log4j2
 public class Table {
 
+    //*****************************************************************************************************************************************************************************
+    //Локаторы элемента; переменные, используемые в методах элемента
+    //*****************************************************************************************************************************************************************************
     String cellLocator = "//tr[@index='%s']/td[%s]"; //любая ячейка s-строки и s-столбца таблицы
-    //String cellButtonLocator = "//div[@class='ant-table-scroll']//tr[@index='%s']//i[contains(@aria-label, '%s')]/ancestor::button"; //кнопки удаления и редактирования в n-й строке (//div[@class='ant-table-scroll']//tr[@index='0']//i[@aria-label='icon: edit'])
     String cellButtonLocator = "//tr[@index='%s']//td[@class='ant-table-fixed-columns-in-body action-column']//i[contains(@aria-label, '%s')]/ancestor::button"; //кнопки удаления и редактирования в n-й строке (//div[@class='ant-table-scroll']//tr[@index='0']//i[@aria-label='icon: edit'])
+    String buttonConfirmDeletionLocator = "//div[@class='ant-popover-inner-content']//span[text()='%s']/ancestor::button"; //кнопки 'Да', 'Нет' всплывающего окошка "Вы уверены?", появляющегося после нажатия кнопки удаления в строке таблицы
+    String tableEmptyDescriptionLocator = "//div[@class='ant-table-scroll']//p[@class='ant-empty-description']"; //если после фильтрации нет данных в таблице, в таблице отображается элемент 'Нет данных'
+    String indexRow; //номер строки таблицы
+    int indexColumn; //номер столбца таблицы
+    String action; //признак, какую кнопку выбирает пользователь в строке таблицы: карандаш (action = 'edit') или корзину (action = 'delete')
+    String confirm; //признак, какую кнопку выбирает пользователь (confirm = 'Да' или confirm = 'Нет') во всплывающем окошке "Вы уверены?", появляющемся после нажатия кнопки удаления в строке таблицы
 
-
-
-
-    String indexRow;
-    int indexColumn;
-    String action;
-
-    //Конструктор для подстановки переменных в методы
+    //*****************************************************************************************************************************************************************************
+    //Методы элемента
+    //*****************************************************************************************************************************************************************************
+    //Конструктор для подстановки переменных в метод cell()
     public Table(String indexRow, int indexColumn) {
         this.indexRow = indexRow;
         this.indexColumn = indexColumn;
     }
 
-    //Конструктор для подстановки переменных в методы
+    //Конструктор для подстановки переменных в метод clickCellButton()
     public Table(String indexRow, String action) {
         this.indexRow = indexRow;
         this.action = action;
+    }
+
+    //Конструктор для подстановки переменных в метод clickConfirmButton()
+    public Table(String confirm) {
+        this.confirm = confirm;
+    }
+    //Пустой конструктор для подстановки переменных в метод tableEmptyDescription()
+    public Table() {
     }
 
     //Метод, возвращающий элемент - ячейку таблицы
@@ -42,5 +51,16 @@ public class Table {
     public void clickCellButton() {
         //Обычный клик не срабатывал. Использовал команду "actions().moveToElement(element).click(element).perform();" (https://ru.selenide.org/2019/12/12/advent-calendar-actions/)
         actions().moveToElement($(By.xpath(String.format(cellButtonLocator, this.indexRow, this.action)))).click($(By.xpath(String.format(cellButtonLocator, this.indexRow, this.action)))).perform();
+    }
+
+    //Метод нажатия на кнопки 'Да' или 'Нет' всплывающего окошка "Вы уверены?" после нажатия кнопки удаления в строке таблицы
+    public void clickConfirmButton() {
+        $(By.xpath(String.format(buttonConfirmDeletionLocator, this.confirm))).hover(); //сначала наводим курсор на кнопку, чтобы убрать всплывающую подсказку (в противном случае не нажимается кнопка)
+        $(By.xpath(String.format(buttonConfirmDeletionLocator, this.confirm))).click(); //нажимаем на кнопку
+    }
+
+    //Метод, возвращающий элемент индикации отсутствия записей в таблице - 'Нет данных'
+    public SelenideElement tableEmptyDescription() {
+        return $(By.xpath(tableEmptyDescriptionLocator));
     }
 }

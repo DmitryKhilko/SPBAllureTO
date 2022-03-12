@@ -129,13 +129,6 @@ public class ConstantsUIMenu extends BasePage{
 
     public static final String VMENU_09 = "Выйти";
 
-    //сообщения окон уведомлений
-    public static final String MESSAGE_NOTIFICATION_WINDOW_01 = "Ошибка авторизации: Неправильный логин или пароль";
-
-    //сообщение о незаполненных полях ввода
-    public static final String INPUT_ERROR_MESSAGE = "Поле обязательно!";
-
-
     //Конструктор для использования аттрибутов выполняемого теста (названия теста и т.п.)
     public ConstantsUIMenu(ITestContext context) {
         super(context);

@@ -6,13 +6,14 @@ import lombok.extern.log4j.Log4j2;
 import org.testng.ITestContext;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import tests.base.BaseTest;
-
+import tests.base.BaseMethodTest;
 import static pages.base.ConstantsUILogin.*;
 import static pages.base.ConstantsUIMenu.*;
+import static pages.base.ConstantsUIMessage.*;
+import static tests.base.Users.*;
 
 @Log4j2
-public class LoginTest extends BaseTest {
+public class LoginTest extends BaseMethodTest {
 
     @BeforeMethod(description = "Открыть страницу логина") //действия, выполняемые перед каждым тестом
     public void precondition(ITestContext context) {
@@ -20,7 +21,6 @@ public class LoginTest extends BaseTest {
                 .openPage()
                 .pageTitleShouldHave(LOGIN_PAGE_TITLE);
     }
-
 
     @Description("Войти в приложение под ролью 'Суперпользователь'. Проверить после входа в приложение: наличие пункта меню с именем текущего пользователя; наличие пунктов горизонтального меню, соответствующих роли; работоспособность пунктов горизонтального и вертикального меню") //описание теста в Allure
     @Test(priority = 1, description = "Войти в приложение под ролью 'Суперпользователь' (логин валидный; пароль валидный)") //приоритет теста, название теста в Allure

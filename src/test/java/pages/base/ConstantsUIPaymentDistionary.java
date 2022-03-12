@@ -2,7 +2,7 @@ package pages.base;
 
 import org.testng.ITestContext;
 
-public class ConstantsUIAteDistionary extends BasePage {
+public class ConstantsUIPaymentDistionary extends BasePage {
 
     //****************************************************************************************************************************************************************************
     //Административная часть КЗ СПБ
@@ -40,7 +40,7 @@ public class ConstantsUIAteDistionary extends BasePage {
     public static final String ATE_FILTER_BUTTON_RESET = "Сбросить";
 
     //Конструктор для использования аттрибутов выполняемого теста (названия теста и т.п.)
-    public ConstantsUIAteDistionary(ITestContext context) {
+    public ConstantsUIPaymentDistionary(ITestContext context) {
         super(context);
     }
 }

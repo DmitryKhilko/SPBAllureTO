@@ -5,17 +5,20 @@ import utils.PropertyReader;
 
 public class URLs extends BasePage{
 
-    //Адреса веб-страниц административной части КЗ СПБ
-    public static final String BASE_URL = System.getenv().getOrDefault("SPB_BASEURL", PropertyReader.getProperty("spb.baseurl")); // значение берется из параметров CI или файла config.property
-    public static final String BASE_URL_PORTAL = System.getenv().getOrDefault("SPB_BASEURLPORTAL", PropertyReader.getProperty("spb.baseurlportal")); // значение берется из параметров CI или файла config.property
-    public static final String LOGIN_PAGE_URL = "/accountants/login";
-    public static final String ATEDICTIONARY_PAGE_URL = "/accountants/administration/ateDictionary"; //Справочник АТЕ
+    //****************************************************************************************************************************************************************************
+    //Константы, связанные с адресами веб-страниц административной части КЗ СПБ
+    //****************************************************************************************************************************************************************************
+    public static final String BASE_URL = System.getenv().getOrDefault("SPB_BASEURL", PropertyReader.getProperty("spb.baseurl")); //базовая страница. Значение берется из параметров CI или файла config.property
+    public static final String LOGIN_PAGE_URL = "/accountants/login"; //страница логина
+    public static final String ATE_DICTIONARY_PAGE_URL = "/accountants/administration/ateDictionary"; //справочник АТЕ
+    public static final String PAYMENT_DICTIONARY_PAGE_URL = "/accountants/administration/paymentDictionary"; //справочник оплат
+    //****************************************************************************************************************************************************************************
+    //Константы, связанные с адресами веб-страниц портала КЗ СПБ
+    //****************************************************************************************************************************************************************************
+    public static final String BASE_URL_PORTAL = System.getenv().getOrDefault("SPB_BASEURLPORTAL", PropertyReader.getProperty("spb.baseurlportal")); //базовая страница. Значение берется из параметров CI или файла config.property
 
-    //Адреса веб-страниц портала
-
+    //Конструктор для использования аттрибутов выполняемого теста (названия теста и т.п.)
     public URLs(ITestContext context) {
         super(context);
     }
-
-
 }
