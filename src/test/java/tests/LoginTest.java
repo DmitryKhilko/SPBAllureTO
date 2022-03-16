@@ -6,14 +6,14 @@ import lombok.extern.log4j.Log4j2;
 import org.testng.ITestContext;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import tests.base.BaseMethodTest;
+import tests.base.BaseTest;
 import static pages.base.ConstantsUILogin.*;
 import static pages.base.ConstantsUIMenu.*;
 import static pages.base.ConstantsUIMessage.*;
 import static tests.base.Users.*;
 
 @Log4j2
-public class LoginTest extends BaseMethodTest {
+public class LoginTest extends BaseTest {
 
     @BeforeMethod(description = "Открыть страницу логина") //действия, выполняемые перед каждым тестом
     public void precondition(ITestContext context) {
@@ -96,6 +96,7 @@ public class LoginTest extends BaseMethodTest {
                 .verticalMenuItemClick(VMENU_0504).pageTitleShouldHave(VMENU_0504_TITLE)
                 .verticalMenuItemClick(VMENU_0505).pageTitleShouldHave(VMENU_0505_TITLE)
                 .verticalMenuItemClick(VMENU_0506).pageTitleShouldHave(VMENU_0506_TITLE);
+
     }
 
     @Description("Войти в приложение под ролью 'Администратор'. Проверить после входа в приложение: наличие пункта меню с именем текущего пользователя; наличие пунктов горизонтального меню, соответствующих роли; работоспособность пунктов горизонтального и вертикального меню")
@@ -143,7 +144,10 @@ public class LoginTest extends BaseMethodTest {
                 //раздел "Курирование деятельности по сертификации"
                 .horizontalMenuItemShouldNotVisible(GMENU_04)
                 //раздел "Подготовка базы данных знаний"
-                .horizontalMenuItemShouldNotVisible(GMENU_05);
+                .horizontalMenuItemShouldNotVisible(GMENU_05)
+                //Выйти из приложения
+                .userNameClick(adminName)
+                .logoutSubmenuItemClick(VMENU_09);
     }
 
     @Issue("2066") //ссылка на баг-репорт
@@ -251,7 +255,10 @@ public class LoginTest extends BaseMethodTest {
                 //раздел "Курирование деятельности по сертификации"
                 .horizontalMenuItemShouldNotVisible(GMENU_04)
                 //раздел "Подготовка базы данных знаний"
-                .horizontalMenuItemShouldNotVisible(GMENU_05);
+                .horizontalMenuItemShouldNotVisible(GMENU_05)
+                //Выйти из приложения
+                .userNameClick(secretaryCommissionName)
+                .logoutSubmenuItemClick(VMENU_09);
     }
 
     @Description("Войти в приложение под ролью 'Член КК'. Проверить после входа в приложение: наличие пункта меню с именем текущего пользователя; наличие пунктов горизонтального меню, соответствующих роли; работоспособность пунктов горизонтального и вертикального меню")
@@ -302,9 +309,14 @@ public class LoginTest extends BaseMethodTest {
                 .verticalMenuItemClick(VMENU_0503).pageTitleShouldHave(VMENU_0503_TITLE)
                 .verticalMenuItemClick(VMENU_0504).pageTitleShouldHave(VMENU_0504_TITLE)
                 .verticalMenuItemClick(VMENU_0505).pageTitleShouldHave(VMENU_0505_TITLE)
-                .verticalMenuItemClick(VMENU_0506).pageTitleShouldHave(VMENU_0506_TITLE);
+                .verticalMenuItemClick(VMENU_0506).pageTitleShouldHave(VMENU_0506_TITLE)
+                //Выйти из приложения
+                .userNameClick(memberCommissionName)
+                .logoutSubmenuItemClick(VMENU_09);
     }
 
+    //Данный тест - костыль, так как я не могу выйти из суперпользователя в тесте №1 (что-то не то горизонтальным с меню).
+    //Данный тест станет ненужным, если брестчане доделают горизонтальное меню
     @Description("Войти в приложение под ролью 'Суперпользователь'. Проверить работоспособность пункта 'Выйти' (выход из приложения)")
     @Test(priority = 6, description = "Выйти из приложения под ролью 'Суперпользователь'")
     public void logout_superUser(ITestContext context) {
@@ -315,18 +327,10 @@ public class LoginTest extends BaseMethodTest {
                 .logoutSubmenuItemClick(VMENU_09);
     }
 
-    @Description("Войти в приложение под ролью 'Администратор'. Проверить работоспособность пункта 'Выйти' (выход из приложения)")
-    @Test(priority = 7, description = "Выйти из приложения под ролью 'Администратор'")
-    public void logout_admin(ITestContext context) {
-        loginPage
-                .login(adminLogin, adminPassword)
-                .closeNotificationWindow()
-                .userNameClick(adminName)
-                .logoutSubmenuItemClick(VMENU_09);
-    }
-
+    //Данный тест - костыль, так как я не могу выйти из специалиста Минфина в тесте №3 (что-то не то с горизонтальным меню).
+    //Данный тест станет ненужным, если брестчане доделают горизонтальное меню
     @Description("Войти в приложение под ролью 'Специалист Минфина'. Проверить работоспособность пункта 'Выйти' (выход из приложения)")
-    @Test(priority = 8, description = "Выйти из приложения под ролью 'Специалист Минфина'")
+    @Test(priority = 7, description = "Выйти из приложения под ролью 'Специалист Минфина'")
     public void logout_specialistMinfin(ITestContext context) {
         loginPage
                 .login(specialistMinfinLogin, specialistMinfinPassword)
@@ -335,28 +339,8 @@ public class LoginTest extends BaseMethodTest {
                 .logoutSubmenuItemClick(VMENU_09);
     }
 
-    @Description("Войти в приложение под ролью 'Секретарь КК'. Проверить работоспособность пункта 'Выйти' (выход из приложения)")
-    @Test(priority = 9, description = "Выйти из приложения под ролью 'Секретарь КК'")
-    public void logout_secretaryCommission(ITestContext context) {
-        loginPage
-                .login(secretaryCommissionLogin, secretaryCommissionPassword)
-                .closeNotificationWindow()
-                .userNameClick(secretaryCommissionName)
-                .logoutSubmenuItemClick(VMENU_09);
-    }
-
-    @Description("Войти в приложение под ролью 'Член КК'. Проверить работоспособность пункта 'Выйти' (выход из приложения)")
-    @Test(priority = 10, description = "Выйти из приложения под ролью 'Член КК'")
-    public void logout_memberCommission(ITestContext context) {
-        loginPage
-                .login(memberCommissionLogin, memberCommissionPassword)
-                .closeNotificationWindow()
-                .userNameClick(memberCommissionName)
-                .logoutSubmenuItemClick(VMENU_09);
-    }
-
     @Description("Сделать попытку входа в приложение с пустым полем ввода логина")
-    @Test(priority = 11, description = "Войти в приложение под ролью 'Суперпользователь' (логин пустой; пароль валидный)")
+    @Test(priority = 8, description = "Войти в приложение под ролью 'Суперпользователь' (логин пустой; пароль валидный)")
     public void loginEmptyUsernameAndValidPassword_SuperUser(ITestContext context) {
         loginPage
                 .login("", superuserPassword);
@@ -365,7 +349,7 @@ public class LoginTest extends BaseMethodTest {
     }
 
     @Description("Сделать попытку входа в приложение с пустым полем ввода пароля")
-    @Test(priority = 12, description = "Войти в приложение под ролью 'Суперпользователь' (логин валидный; пароль пустой)")
+    @Test(priority = 9, description = "Войти в приложение под ролью 'Суперпользователь' (логин валидный; пароль пустой)")
     public void loginValidUsernameAndEmptyPassword_SuperUser(ITestContext context) {
         loginPage
                 .login(superuserLogin, "");
@@ -374,7 +358,7 @@ public class LoginTest extends BaseMethodTest {
     }
 
     @Description("Сделать попытку входа в приложение с некорректным значением логина")
-    @Test(priority = 13, description = "Войти в приложение под ролью 'Суперпользователь' (логин невалидный; пароль валидный)")
+    @Test(priority = 10, description = "Войти в приложение под ролью 'Суперпользователь' (логин невалидный; пароль валидный)")
     public void loginInvalidUsernameAndValidPassword_SuperUser(ITestContext context) {
         loginPage
                 .login("123", superuserPassword);
@@ -383,7 +367,7 @@ public class LoginTest extends BaseMethodTest {
     }
 
     @Description("Сделать попытку входа в приложение с некорректным значением пароля")
-    @Test(priority = 14, description = "Войти в приложение под ролью 'Суперпользователь' (логин валидный; пароль невалидный)")
+    @Test(priority = 11, description = "Войти в приложение под ролью 'Суперпользователь' (логин валидный; пароль невалидный)")
     public void loginValidUsernameAndInvalidPassword_SuperUser(ITestContext context) {
         loginPage
                 .login(superuserLogin, "123");

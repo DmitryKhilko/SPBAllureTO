@@ -19,9 +19,12 @@ public class HeaderPage extends BasePage {
     //****************************************************************************************************************************************************************************
     //Локаторы пунктов горизонтального и вертикального меню, заголовков страниц; переменные, используемые в методах
     //****************************************************************************************************************************************************************************
+    public SelenideElement appTitle = $(By.xpath("//div[contains(@class, 'app-title')]")); //герб Минфина в левом верхнем углу; при его нажатии активируется пункт '...'
+
     public SelenideElement horizontalSubmenuItem = $(By.xpath("//li[contains(@class,'ant-menu-submenu-selected')]//span[contains(text(),'···')]")); // '...' - за которым скрываются непомещающиеся пункты меню
 
-    public SelenideElement userNameMenuItemInvisible = $(By.xpath("//div[contains(@class, 'ant-menu-submenu-popup')]//div[@class = 'submenu-username']")); // имя пользователя, когда при входе оно скрыто за '...'
+    //public SelenideElement userNameMenuItemInvisible = $(By.xpath("//div[contains(@class, 'ant-menu-submenu-popup')]//div[@class = 'submenu-username']")); // имя пользователя, когда при входе оно скрыто за '...'
+    public SelenideElement userNameMenuItemInvisible = $(By.xpath("//li[contains(@class, 'ant-menu-submenu-vertical-left')]//div[@class = 'submenu-username']")); // имя пользователя, когда при входе оно скрыто за '...'
     public SelenideElement userNameMenuItemVisible = $(By.xpath("//div[@class = 'submenu-username']")); // имя пользователя, когда при входе оно не скрыто за '...'
 
     public String horizontalMenuItemVisibleLocator = "//li[contains(@class,'ant-menu-item')]/a[text()='%s']"; // пункты меню страницы после входа в приложение, не скрытые за '...'
@@ -175,7 +178,7 @@ public class HeaderPage extends BasePage {
     @Step("Выбрать в горизонтальном меню пункт '{userName}' (пользователь, под которым вошли в приложение)")
     public HeaderPage userNameClick(String userName) {
         if (horizontalSubmenuItem.exists()) { // если пункт '...' виден
-            log.debug("Тест " + context.getAttribute("testName") + ": при наличии в горизонтальном меню пункта '...' открыть вложенное меню, нажав на '...'");
+            log.debug("Тест " + context.getAttribute("testName") + ": открыть вложенное меню, нажав на '...'");
             horizontalSubmenuItem.click();
             log.debug("Тест " + context.getAttribute("testName") + ": кликнуть по пункту меню с именем текущего пользователя '" + userName + "'");
             userNameMenuItemInvisible.click();
@@ -200,10 +203,10 @@ public class HeaderPage extends BasePage {
     }
 
     @Step("Выбрать пункт '{menuItem}' в подменю пункта меню с именем текущего пользователя")
-    public HeaderPage logoutSubmenuItemClick(String menuItem) {
+    public LoginPage logoutSubmenuItemClick(String menuItem) {
         log.debug("Тест " + context.getAttribute("testName") + ": кликнуть в подменю горизонтального меню по пункту '" + menuItem + "'");
         $(By.xpath(String.format(exitMenuItemInvisibleLocator, menuItem))).click();
-        log.debug("Тест " + context.getAttribute("testName") + ": остаться на текущей странице 'HeaderPage'");
-        return this;
+        log.debug("Тест " + context.getAttribute("testName") + ": перейти на страницу 'LoginPage'");
+        return new LoginPage(context);
     }
 }

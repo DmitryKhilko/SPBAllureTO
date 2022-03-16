@@ -8,6 +8,8 @@ import models.dictionary.CertificateChangeCauseDictionary;
 import org.testng.ITestContext;
 import pages.base.BasePage;
 
+import java.io.IOException;
+
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.open;
@@ -76,6 +78,30 @@ public class CertificateChangeCauseDictionaryPage extends BasePage {
     public CertificateChangeCauseDictionaryPage tableDataShouldNotBeVisible(String text) {
         log.debug("Тест " + context.getAttribute("testName") + ": проверить отсутствие причины изменения СПБ в таблице в таблице - отсутствует строка с наименованием причины '" + text + "'");
         new Table(text).tableDataShouldNotBeVisible();
+        log.debug("Тест " + context.getAttribute("testName") + ": остаться на текущей странице 'CertificateChangeCauseDictionaryPage'");
+        return this;
+    }
+
+    @Step("Отсортировать в таблице значения столбца '{indexColumn}' по убыванию")
+    public CertificateChangeCauseDictionaryPage tableHeaderSortDown(int indexColumn) {
+        log.debug("Тест " + context.getAttribute("testName") + ": отсортировать в таблице значения столбца '" + indexColumn + "' по убыванию");
+        new Table(indexColumn).tableHeaderSortDown();
+        log.debug("Тест " + context.getAttribute("testName") + ": остаться на текущей странице 'CertificateChangeCauseDictionaryPage'");
+        return this;
+    }
+
+    @Step("Отсортировать в таблице значения столбца '{indexColumn}' по возрастанию")
+    public CertificateChangeCauseDictionaryPage tableHeaderSortUp(int indexColumn) {
+        log.debug("Тест " + context.getAttribute("testName") + ": отсортировать в таблице значения столбца '" + indexColumn + "' по возрастанию");
+        new Table(indexColumn).tableHeaderSortUp();
+        log.debug("Тест " + context.getAttribute("testName") + ": остаться на текущей странице 'CertificateChangeCauseDictionaryPage'");
+        return this;
+    }
+
+    @Step("Снять сортировку в таблице со столбца '{indexColumn}'")
+    public CertificateChangeCauseDictionaryPage tableHeaderUnSort(int indexColumn) {
+        log.debug("Тест " + context.getAttribute("testName") + ": снять сортировку в таблице со столбца '" + indexColumn + "'");
+        new Table(indexColumn).tableHeaderUnSort();
         log.debug("Тест " + context.getAttribute("testName") + ": остаться на текущей странице 'CertificateChangeCauseDictionaryPage'");
         return this;
     }

@@ -14,6 +14,7 @@ import pages.dictionary.*;
 public abstract class BaseClassTest {
 
     public LoginPage loginPage;
+    public HeaderPage headerPage;
     public AteDictionaryPage ateDictionaryPage;
     public AteDictionaryCreatePage ateDictionaryCreatePage;
     public AteDictionaryUpdatePage ateDictionaryUpdatePage;
@@ -48,6 +49,7 @@ public abstract class BaseClassTest {
 
         //Инициализация страниц, описанные в пакете pages, с которыми производится работа в тестах
         loginPage = new LoginPage(context);
+        headerPage = new HeaderPage(context);
         ateDictionaryPage = new AteDictionaryPage(context);
         ateDictionaryCreatePage = new AteDictionaryCreatePage(context);
         ateDictionaryUpdatePage = new AteDictionaryUpdatePage(context);

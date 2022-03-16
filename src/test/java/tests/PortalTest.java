@@ -5,13 +5,13 @@ import lombok.extern.log4j.Log4j2;
 import org.testng.ITestContext;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import tests.base.BaseMethodTest;
+import tests.base.BaseTest;
 
 import static pages.base.ConstantsUIPortalLogin.*;
 import static tests.base.Users.*;
 
 @Log4j2
-public class PortalTest extends BaseMethodTest {
+public class PortalTest extends BaseTest {
 
     @BeforeMethod(description = "Открыть страницу портала") //действия, выполняемые перед каждым тестом
     public void precondition(ITestContext context) {

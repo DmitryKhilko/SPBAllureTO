@@ -12,7 +12,9 @@ public class NotificationWindow {
     //*****************************************************************************************************************************************************************************
     //Элементы окна уведомлений
     public SelenideElement closeButtonNotificationWindow = $(By.xpath("//div[contains(@class,'notification')]/a")); //кнопка 'крестик' для закрытия окна уведомлений
+    public SelenideElement messageNotificationWindow = $(By.xpath("//div[contains(@class,'notification')]//div[contains(@class,'message')]")); //заголовок окна окна уведомлений
     public SelenideElement descriptionNotificationWindow = $(By.xpath("//div[contains(@class,'notification')]//div[contains(@class,'description')]")); //текст сообщения окна уведомлений
+
 
     //*****************************************************************************************************************************************************************************
     //Методы элемента
