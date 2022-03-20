@@ -11,6 +11,7 @@ import tests.base.BaseTest;
 import java.io.IOException;
 import static pages.base.ConstantsUIAteDistionary.*;
 import static pages.base.ConstantsUICertificateChangeCauseDictionary.*;
+import static pages.base.ConstantsUIDocumentTypeDistionary.DOCUMENT_TYPE_UPDATE_TITLE;
 import static pages.base.ConstantsUIMessage.*;
 import static pages.base.ConstantsUIPaymentDistionary.*;
 import static pages.base.ConstantsUIRoleDistionary.*;
@@ -312,25 +313,25 @@ public class DictionaryTest extends BaseTest {
     @Description("Проверить редактирование типа документа с валидными значениями параметров. Редактирование произвести под ролью 'Администратор', как наиболее характерной для редактирования роли")
     public void updateDocumentType_UI(ITestContext context) {
 
-        roleDictionaryPage
+        documentTypeDictionaryPage
                 .openPage()
                 .tableHeaderSortUp(1);
         log.debug("Тест " + context.getAttribute("testName") + ": создать объект с исходным названием типа документа");
-        RoleDictionary role = RoleDictionaryFactory.get(tableCellValue("0",1));
+        DocumentTypeDictionary documentType = DocumentTypeDictionaryFactory.get(tableCellValue("0",1));
         log.debug("Тест " + context.getAttribute("testName") + ": создать объект с тестовыми данными для редактирования типа документа");
-        RoleDictionary updateRole = RoleDictionaryFactory.get(role.getName() + "_update");
+        DocumentTypeDictionary updateDocumentType = DocumentTypeDictionaryFactory.get(documentType.getName() + "_update");
 
-        roleDictionaryPage
-                //редактируем роль
+        documentTypeDictionaryPage
+                //редактируем тип документа
                 .openUpdateDialog("0")
-                .updateRole(ROLE_UPDATE_TITLE, updateRole)
-                .tableCellValueShouldHave("0", 1, updateRole.getName())
+                .updateDocumentType(DOCUMENT_TYPE_UPDATE_TITLE, updateDocumentType)
+                .tableCellValueShouldHave("0", 1, updateDocumentType.getName())
                 .tableCellValueShouldHave("0", 2, adminLogin)
                 .tableCellValueShouldHave("0", 3, dateTime)
-                //возвращаем исходные значения для роли
+                //возвращаем исходные значения для типа документа
                 .openUpdateDialog("0")
-                .updateRole(ROLE_UPDATE_TITLE, role)
-                .tableCellValueShouldHave("0", 1, role.getName())
+                .updateDocumentType(DOCUMENT_TYPE_UPDATE_TITLE, documentType)
+                .tableCellValueShouldHave("0", 1, documentType.getName())
                 .tableCellValueShouldHave("0", 2, adminLogin)
                 .tableCellValueShouldHave("0", 3, dateTime);
     }

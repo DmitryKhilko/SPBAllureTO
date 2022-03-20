@@ -33,6 +33,8 @@ public abstract class BaseTest {
     public RoleDictionaryUpdatePage roleDictionaryUpdatePage;
     public PaymentDictionaryPage paymentDictionaryPage;
     public PaymentDictionaryUpdatePage paymentDictionaryUpdatePage;
+    public DocumentTypeDictionaryPage documentTypeDictionaryPage;
+    public DocumentTypeDictionaryUpdatePage documentTypeDictionaryUpdatePage;
     public PortalPage portalPage;
 
     @Parameters({"BROWSER"})
@@ -75,6 +77,8 @@ public abstract class BaseTest {
         roleDictionaryUpdatePage = new RoleDictionaryUpdatePage(context);
         paymentDictionaryPage = new PaymentDictionaryPage(context);
         paymentDictionaryUpdatePage = new PaymentDictionaryUpdatePage(context);
+        documentTypeDictionaryPage = new DocumentTypeDictionaryPage(context);
+        documentTypeDictionaryUpdatePage = new DocumentTypeDictionaryUpdatePage(context);
         portalPage = new PortalPage(context);
     }
 

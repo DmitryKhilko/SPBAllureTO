@@ -14,6 +14,7 @@ public class URLs extends BasePage{
     public static final String PAYMENT_DICTIONARY_PAGE_URL = "/accountants/administration/paymentDictionary"; //справочник видов оплат
     public static final String CERTIFICATE_CHANGE_CAUSE_DICTIONARY_PAGE_URL = "/accountants/administration/diplomaChangeCauseDictionary"; //справочник причин изменения сертификата профессионального бухгалтера
     public static final String ROLE_DICTIONARY_PAGE_URL = "/accountants/administration/roleDictionary"; //справочник ролей
+    public static final String DOCUMENT_TYPE_DICTIONARY_PAGE_URL = "/accountants/administration/documentTypeDictionary"; //справочник типов документов
 
 
     //****************************************************************************************************************************************************************************
