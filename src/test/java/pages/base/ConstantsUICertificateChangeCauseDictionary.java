@@ -18,7 +18,6 @@ public class ConstantsUICertificateChangeCauseDictionary extends BasePage {
     public static final String CERTIFICATE_CHANGE_CAUSE_CREATE_SIGN_LABEL= "Признак изменения (выдача, изм, аннул.)";
     public static final String CERTIFICATE_CHANGE_CAUSE_CREATE_BUTTON_CANCEL = "Отмена";
     public static final String CERTIFICATE_CHANGE_CAUSE_CREATE_BUTTON_OK = "OK";
-    public static final String CERTIFICATE_CHANGE_CAUSE_CREATE_ERROR_MESSAGE = "Поле обязательно!";
 
     //страница 'CertificateChangeCauseDictionaryUpdatePage' (диалоговое окно редактирования причины изменения)
     public static final String CERTIFICATE_CHANGE_CAUSE_UPDATE_TITLE= "Редактирование позиции в справочнике причин изменения сертификата профессионального бухгалтера";
@@ -26,7 +25,6 @@ public class ConstantsUICertificateChangeCauseDictionary extends BasePage {
     public static final String CERTIFICATE_CHANGE_CAUSE_UPDATE_SIGN_LABEL= "Признак изменения (выдача, изм, аннул.)";
     public static final String CERTIFICATE_CHANGE_CAUSE_UPDATE_BUTTON_CANCEL = "Отмена";
     public static final String CERTIFICATE_CHANGE_CAUSE_UPDATE_BUTTON_OK = "OK";
-    public static final String CERTIFICATE_CHANGE_CAUSE_UPDATE_ERROR_MESSAGE = "Поле обязательно!";
 
     //Конструктор для использования аттрибутов выполняемого теста (названия теста и т.п.)
     public ConstantsUICertificateChangeCauseDictionary(ITestContext context) {

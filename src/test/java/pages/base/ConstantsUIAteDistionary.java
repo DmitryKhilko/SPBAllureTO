@@ -21,7 +21,6 @@ public class ConstantsUIAteDistionary extends BasePage {
     public static final String ATE_CREATE_GOVERNMENT_LABEL= "Орган управления";
     public static final String ATE_CREATE_BUTTON_CANCEL = "Отмена";
     public static final String ATE_CREATE_BUTTON_OK = "OK";
-    public static final String ATE_CREATE_ERROR_MESSAGE = "Поле обязательно!";
 
     //страница 'AteDictionaryUpdatePage' (диалоговое окно редактирования АТЕ)
     public static final String ATE_UPDATE_TITLE= "Редактирование позиции в справочнике АТЕ";
@@ -30,7 +29,6 @@ public class ConstantsUIAteDistionary extends BasePage {
     public static final String ATE_UPDATE_GOVERNMENT_LABEL= "Орган управления";
     public static final String ATE_UPDATE_BUTTON_CANCEL = "Отмена";
     public static final String ATE_UPDATE_BUTTON_OK = "OK";
-    public static final String ATE_UPDATE_ERROR_MESSAGE = "Поле обязательно!";
 
     //страница 'AteDictionaryFilterPage' (панель фильтров на странице 'Справочник АТЕ')
     public static final String ATE_FILTER_PARENT_NAME_LABEL= "Наименование родителя";

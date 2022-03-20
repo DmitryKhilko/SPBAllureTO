@@ -33,11 +33,11 @@ public class CertificateChangeCauseDictionaryUpdatePage extends BasePage {
 
     @Step("Отредактировать причину изменения СПБ")
     public CertificateChangeCauseDictionaryPage updateChangeCause(String title, CertificateChangeCauseDictionary certificateChangeCauseDictionary) {
-        log.debug("Тест " + context.getAttribute("testName") + ": проверить, содержит ли открывшееся диалоговое окно редактирования причины изменения СПБ заголовок '" + title + "'");
+        log.debug("Тест " + context.getAttribute("testName") + ": проверить, содержит ли открывшееся диалоговое окно заголовок '" + title + "'");
         titleDialogWindow.shouldHave(exactText(title));
-        log.debug("Тест " + context.getAttribute("testName") + ": ввести в поле ввода  '" + CERTIFICATE_CHANGE_CAUSE_UPDATE_NAME_LABEL + "' значение '" + certificateChangeCauseDictionary.getName() + "'");
+        log.debug("Тест " + context.getAttribute("testName") + ": ввести в поле ввода '" + CERTIFICATE_CHANGE_CAUSE_UPDATE_NAME_LABEL + "' значение '" + certificateChangeCauseDictionary.getName() + "'");
         new InputDialogWindow(CERTIFICATE_CHANGE_CAUSE_UPDATE_NAME_LABEL).write(certificateChangeCauseDictionary.getName());
-        log.debug("Тест " + context.getAttribute("testName") + ": выбрать из раскрывающегося списка  '" + CERTIFICATE_CHANGE_CAUSE_UPDATE_SIGN_LABEL + "' значение '" + certificateChangeCauseDictionary.getSign() + "'");
+        log.debug("Тест " + context.getAttribute("testName") + ": выбрать из раскрывающегося списка '" + CERTIFICATE_CHANGE_CAUSE_UPDATE_SIGN_LABEL + "' значение '" + certificateChangeCauseDictionary.getSign() + "'");
         new DropDownDialogWindow(CERTIFICATE_CHANGE_CAUSE_UPDATE_SIGN_LABEL).selectOption1(certificateChangeCauseDictionary.getSign());
         log.debug("Тест " + context.getAttribute("testName") + ": нажать кнопку '" + CERTIFICATE_CHANGE_CAUSE_UPDATE_BUTTON_OK + "' для изменения причины изменения СПБ");
         new ButtonDialogWindow(CERTIFICATE_CHANGE_CAUSE_UPDATE_BUTTON_OK).click();

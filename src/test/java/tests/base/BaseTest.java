@@ -29,6 +29,8 @@ public abstract class BaseTest {
     public CertificateChangeCauseDictionaryPage certificateChangeCauseDictionaryPage;
     public CertificateChangeCauseDictionaryCreatePage certificateChangeCauseDictionaryCreatePage;
     public CertificateChangeCauseDictionaryUpdatePage certificateChangeCauseDictionaryUpdatePage;
+    public RoleDictionaryPage roleDictionaryPage;
+    public RoleDictionaryUpdatePage roleDictionaryUpdatePage;
     public PortalPage portalPage;
 
     @Parameters({"BROWSER"})
@@ -67,6 +69,8 @@ public abstract class BaseTest {
         certificateChangeCauseDictionaryPage = new CertificateChangeCauseDictionaryPage(context);
         certificateChangeCauseDictionaryCreatePage = new CertificateChangeCauseDictionaryCreatePage(context);
         certificateChangeCauseDictionaryUpdatePage = new CertificateChangeCauseDictionaryUpdatePage(context);
+        roleDictionaryPage = new RoleDictionaryPage(context);
+        roleDictionaryUpdatePage = new RoleDictionaryUpdatePage(context);
         portalPage = new PortalPage(context);
     }
 

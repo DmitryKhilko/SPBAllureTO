@@ -3,6 +3,7 @@ package pages;
 import com.codeborne.selenide.SelenideElement;
 import elements.Button;
 import elements.Input;
+import elements.InputErrorMessage;
 import elements.NotificationWindow;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
@@ -62,7 +63,7 @@ public class LoginPage extends BasePage {
     @Step("Проверить, вывелось ли сообщение об ошибке '{message}' при пустом поле ввода логина")
     public LoginPage loginErrorMessageShouldHave(String message) {
         log.debug("Тест " + context.getAttribute("testName") + ": проверить, вывелось ли сообщение об ошибке '" + message + "' при пустом поле ввода логина");
-        new Input(LOGIN_LABEL).inputErrorMessage().shouldHave(exactText(message));
+        new InputErrorMessage(LOGIN_LABEL).message().shouldHave(exactText(message));
         log.debug("Тест " + context.getAttribute("testName") + ": остаться на текущей странице 'LoginPage'");
         return this;
     }
@@ -70,7 +71,7 @@ public class LoginPage extends BasePage {
     @Step("Проверить, вывелось ли сообщение об ошибке '{message}' при пустом поле ввода пароля")
     public LoginPage passwordErrorMessageShouldHave(String message) {
         log.debug("Тест " + context.getAttribute("testName") + ": проверить, вывелось ли сообщение об ошибке '" + message + "' при пустом поле ввода пароля");
-        new Input(PASSWORD_LABEL).inputErrorMessage().shouldHave(exactText(message));
+        new InputErrorMessage(PASSWORD_LABEL).message().shouldHave(exactText(message));
         log.debug("Тест " + context.getAttribute("testName") + ": остаться на текущей странице 'LoginPage'");
         return this;
     }
