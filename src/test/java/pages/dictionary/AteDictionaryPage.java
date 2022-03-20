@@ -75,9 +75,9 @@ public class AteDictionaryPage extends BasePage {
         return this;
     }
 
-    @Step("Нажать кнопку 'Редактировать' в строке таблицы для редактирования АТЕ")
+    @Step("Нажать кнопку 'Редактировать' в строке '{indexRow}' таблицы для редактирования АТЕ")
     public AteDictionaryUpdatePage openUpdateDialog(String indexRow) {
-        log.debug("Тест " + context.getAttribute("testName") + ": нажать кнопку 'Редактировать' в строке таблицы для редактирования АТЕ");
+        log.debug("Тест " + context.getAttribute("testName") + ": нажать кнопку 'Редактировать' в строке '" + indexRow + "' таблицы для редактирования АТЕ");
         new Table(indexRow, "edit").clickCellButton();
         log.debug("Тест " + context.getAttribute("testName") + ": перейти на страницу 'AteDictionaryUpdatePage'");
         return new AteDictionaryUpdatePage(context);
@@ -97,6 +97,14 @@ public class AteDictionaryPage extends BasePage {
     public AteDictionaryPage tableDataShouldNotBeVisible() {
         log.debug("Тест " + context.getAttribute("testName") + ": проверить отсутствие АТЕ в таблице - отображено сообщение 'Нет данных'");
         new Table().tableEmptyDescription().shouldBe(visible);
+        log.debug("Тест " + context.getAttribute("testName") + ": остаться на текущей странице 'AteDictionaryPage'");
+        return this;
+    }
+
+    @Step("Отсортировать в таблице значения столбца '{indexColumn}' по возрастанию")
+    public AteDictionaryPage tableHeaderSortUp(int indexColumn) {
+        log.debug("Тест " + context.getAttribute("testName") + ": отсортировать в таблице значения столбца '" + indexColumn + "' по возрастанию");
+        new Table(indexColumn).tableHeaderSortUp();
         log.debug("Тест " + context.getAttribute("testName") + ": остаться на текущей странице 'AteDictionaryPage'");
         return this;
     }

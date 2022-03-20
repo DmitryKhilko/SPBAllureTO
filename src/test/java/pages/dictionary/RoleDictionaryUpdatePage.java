@@ -3,20 +3,12 @@ package pages.dictionary;
 import elements.*;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
-import models.dictionary.CertificateChangeCauseDictionary;
 import models.dictionary.RoleDictionary;
 import org.testng.ITestContext;
-import pages.LoginPage;
 import pages.base.BasePage;
-
 import java.io.IOException;
-
 import static com.codeborne.selenide.Condition.exactText;
-import static pages.base.ConstantsUICertificateChangeCauseDictionary.*;
-import static pages.base.ConstantsUILogin.LOGIN_LABEL;
-import static pages.base.ConstantsUILogin.PASSWORD_LABEL;
-import static pages.base.ConstantsUIRoleDistionary.ROLE_UPDATE_BUTTON_OK;
-import static pages.base.ConstantsUIRoleDistionary.ROLE_UPDATE_NAME_LABEL;
+import static pages.base.ConstantsUIRoleDistionary.*;
 
 @Log4j2
 public class RoleDictionaryUpdatePage extends BasePage {
@@ -24,7 +16,7 @@ public class RoleDictionaryUpdatePage extends BasePage {
     //****************************************************************************************************************************************************************************
     //Локаторы диалогового окна 'Редактирование позиции в справочнике ролей'; переменные, используемые в методах диалогового окна
     //****************************************************************************************************************************************************************************
-    public static String updateRoleDateTime; //дата и время редактирования роли
+
 
     //****************************************************************************************************************************************************************************
     //Методы диалогового окна 'Редактирование позиции в справочнике ролей'
@@ -43,7 +35,7 @@ public class RoleDictionaryUpdatePage extends BasePage {
         log.debug("Тест " + context.getAttribute("testName") + ": нажать кнопку '" + ROLE_UPDATE_BUTTON_OK + "' для изменения роли");
         new ButtonDialogWindow(ROLE_UPDATE_BUTTON_OK).click();
         log.debug("Тест " + context.getAttribute("testName") + ": сохранить дату и время редактирования роли для проверки успешности редактирования роли");
-        updateRoleDateTime = cellDateTime();
+        dateTime = cellDateTime();
         log.debug("Тест " + context.getAttribute("testName") + ": перейти на страницу 'RoleDictionaryPage'");
         return new RoleDictionaryPage(context);
     }

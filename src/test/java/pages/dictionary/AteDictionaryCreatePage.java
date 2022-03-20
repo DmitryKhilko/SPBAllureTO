@@ -17,7 +17,7 @@ public class AteDictionaryCreatePage extends BasePage {
     //****************************************************************************************************************************************************************************
     //Локаторы диалогового окна 'Добавление позиции в справочник АТЕ'; переменные, используемые в методах диалогового окна
     //****************************************************************************************************************************************************************************
-    public static String createATEDateTime; //дата и время создания нового АТЕ
+
 
     //***************************************************************************************************************************************
     //Методы диалогового окна 'Добавление позиции в справочник АТЕ'
@@ -40,7 +40,7 @@ public class AteDictionaryCreatePage extends BasePage {
         log.debug("Тест " + context.getAttribute("testName") + ": нажать кнопку '" + ATE_CREATE_BUTTON_OK + "' для создания нового АТЕ");
         new ButtonDialogWindow(ATE_CREATE_BUTTON_OK).click();
         log.debug("Тест " + context.getAttribute("testName") + ": сохранить дату и время создания АТЕ для проверки успешности создания АТЕ");
-        createATEDateTime = cellDateTime();
+        dateTime = cellDateTime();
         log.debug("Тест " + context.getAttribute("testName") + ": перейти на страницу 'AteDictionaryPage'");
         return new AteDictionaryPage(context);
     }

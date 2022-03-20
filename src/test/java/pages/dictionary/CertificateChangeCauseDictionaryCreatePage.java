@@ -17,7 +17,7 @@ public class CertificateChangeCauseDictionaryCreatePage extends BasePage {
     //****************************************************************************************************************************************************************************
     //Локаторы диалогового окна 'Добавление позиции в справочник причин изменения сертификата профессионального бухгалтера'; переменные, используемые в методах диалогового окна
     //****************************************************************************************************************************************************************************
-    public static String createChangeCauseDateTime; //дата и время создания новой причины изменения СПБ
+
 
     //***************************************************************************************************************************************
     //Методы диалогового окна 'Добавление позиции в справочник причин изменения сертификата профессионального бухгалтера'
@@ -38,7 +38,7 @@ public class CertificateChangeCauseDictionaryCreatePage extends BasePage {
         log.debug("Тест " + context.getAttribute("testName") + ": нажать кнопку '" + CERTIFICATE_CHANGE_CAUSE_CREATE_BUTTON_OK + "' для создания новой причины изменения СПБ");
         new ButtonDialogWindow(CERTIFICATE_CHANGE_CAUSE_CREATE_BUTTON_OK).click();
         log.debug("Тест " + context.getAttribute("testName") + ": сохранить дату и время создания новой причины изменения СПБ для проверки успешности создания новой причины изменения СПБ");
-        createChangeCauseDateTime = cellDateTime();
+        dateTime = cellDateTime();
         log.debug("Тест " + context.getAttribute("testName") + ": перейти на страницу 'CertificateChangeCauseDictionaryPage'");
         return new CertificateChangeCauseDictionaryPage(context);
     }

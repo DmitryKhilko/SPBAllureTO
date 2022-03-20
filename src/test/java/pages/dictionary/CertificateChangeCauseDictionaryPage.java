@@ -4,14 +4,9 @@ import elements.Button;
 import elements.Table;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
-import models.dictionary.CertificateChangeCauseDictionary;
 import org.testng.ITestContext;
 import pages.base.BasePage;
-
-import java.io.IOException;
-
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.open;
 import static pages.base.ConstantsUICertificateChangeCauseDictionary.*;
 import static pages.base.URLs.*;
@@ -56,9 +51,9 @@ public class CertificateChangeCauseDictionaryPage extends BasePage {
         return this;
     }
 
-    @Step("Нажать кнопку 'Редактировать' в строке таблицы для редактирования причины изменения СПБ")
+    @Step("Нажать кнопку 'Редактировать' в строке '{indexRow}' таблицы для редактирования причины изменения СПБ")
     public CertificateChangeCauseDictionaryUpdatePage openUpdateDialog(String indexRow) {
-        log.debug("Тест " + context.getAttribute("testName") + ": нажать кнопку 'Редактировать' в строке таблицы для редактирования причины изменения СП");
+        log.debug("Тест " + context.getAttribute("testName") + ": нажать кнопку 'Редактировать' в строке '" + indexRow + "' таблицы для редактирования причины изменения СП");
         new Table(indexRow, "edit").clickCellButton();
         log.debug("Тест " + context.getAttribute("testName") + ": перейти на страницу 'CertificateChangeCauseDictionaryUpdatePage'");
         return new CertificateChangeCauseDictionaryUpdatePage(context);

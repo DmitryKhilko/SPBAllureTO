@@ -1,6 +1,5 @@
 package tests;
 
-import com.google.common.collect.Table;
 import io.qameta.allure.Description;
 import lombok.extern.log4j.Log4j2;
 import models.dictionary.*;
@@ -9,18 +8,12 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import tests.base.BaseTest;
-
 import java.io.IOException;
-
 import static pages.base.ConstantsUIAteDistionary.*;
 import static pages.base.ConstantsUICertificateChangeCauseDictionary.*;
 import static pages.base.ConstantsUIMessage.*;
+import static pages.base.ConstantsUIPaymentDistionary.*;
 import static pages.base.ConstantsUIRoleDistionary.*;
-import static pages.dictionary.AteDictionaryCreatePage.*;
-import static pages.dictionary.AteDictionaryUpdatePage.*;
-import static pages.dictionary.CertificateChangeCauseDictionaryCreatePage.*;
-import static pages.dictionary.CertificateChangeCauseDictionaryUpdatePage.*;
-import static pages.dictionary.RoleDictionaryUpdatePage.*;
 import static tests.base.Users.*;
 
 @Log4j2
@@ -65,7 +58,7 @@ public class DictionaryTest extends BaseTest {
                 .tableCellValueShouldHave("0", 2, newAte.getName())
                 .tableCellValueShouldHave("0", 3, newAte.getGovernment())
                 .tableCellValueShouldHave("0", 4, adminLogin)
-                .tableCellValueShouldHave("0", 5, createATEDateTime)
+                .tableCellValueShouldHave("0", 5, dateTime)
                 .deleteATE("0"); //TODO удалить АТЕ с помощью API
     }
 
@@ -88,13 +81,11 @@ public class DictionaryTest extends BaseTest {
 
         log.debug("Тест " + context.getAttribute("testName") + ": добавить ожидание, чтобы после перехода на страницу в фоне сформировался список наименований родителей с целью последующего выбора из данного списка при редактировании АТЕ");
         Thread.sleep(1000);
-        log.debug("Тест " + context.getAttribute("testName") + ": создать объект с тестовыми данными для отбора ранее созданного тестового АТЕ");
-        AteDictionary ate = AteDictionaryFactory.get("Брестская обл.", "г. Тестовый_1", "Тестовый РИК_1");
         log.debug("Тест " + context.getAttribute("testName") + ": создать объект с тестовыми данными для редактирования ранее созданного АТЕ");
         AteDictionary updateAte = AteDictionaryFactory.get("Витебская обл.", "г. Тестовый_update", "Тестовый РИК_update");
         ateDictionaryPage
                 .showFilters()
-                .filterData(ate)
+                .filterData(newAte)
                 .openUpdateDialog("0")
                 .updateATE(ATE_UPDATE_TITLE, updateAte);
         ateDictionaryFilterPage
@@ -103,7 +94,7 @@ public class DictionaryTest extends BaseTest {
                 .tableCellValueShouldHave("0", 2, updateAte.getName())
                 .tableCellValueShouldHave("0", 3, updateAte.getGovernment())
                 .tableCellValueShouldHave("0", 4, adminLogin)
-                .tableCellValueShouldHave("0", 5, updateDateTime)
+                .tableCellValueShouldHave("0", 5, dateTime)
                 .deleteATE("0"); //TODO удалить АТЕ с помощью API
     }
 
@@ -141,32 +132,31 @@ public class DictionaryTest extends BaseTest {
 // TODO 6. Произвести попытку редактирования АТЕ с невалидными значениями
 //****************************************************************************************************************************************************************************
 
-    @Ignore
     @Test(priority = 11, description = "Отредактировать вид оплаты с помощью UI (валидные значения)")
     @Description("Проверить редактирование вида оплаты с валидными значениями параметров. Редактирование произвести под ролью 'Администратор', как наиболее характерной для редактирования роли.")
     public void updatePayment_UI(ITestContext context) {
 
-        roleDictionaryPage
+        paymentDictionaryPage
                 .openPage()
                 .tableHeaderSortUp(1);
         log.debug("Тест " + context.getAttribute("testName") + ": создать объект с исходным названием вида оплаты");
-        RoleDictionary Role = RoleDictionaryFactory.get(roleDictionaryPage.tableCellValue("0",1));
+        PaymentDictionary payment = PaymentDictionaryFactory.get(tableCellValue("0",1));
         log.debug("Тест " + context.getAttribute("testName") + ": создать объект с тестовыми данными для редактирования вида оплаты");
-        RoleDictionary updateRole = RoleDictionaryFactory.get(Role.getName() + "_update");
+        PaymentDictionary updatePayment = PaymentDictionaryFactory.get(payment.getName() + "_update");
 
-        roleDictionaryPage
+        paymentDictionaryPage
                 //редактируем вид оплаты
                 .openUpdateDialog("0")
-                .updateRole(ROLE_UPDATE_TITLE, updateRole)
-                .tableCellValueShouldHave("0", 1, updateRole.getName())
+                .updatePayment(PAYMENT_UPDATE_TITLE, updatePayment)
+                .tableCellValueShouldHave("0", 1, updatePayment.getName())
                 .tableCellValueShouldHave("0", 2, adminLogin)
-                .tableCellValueShouldHave("0", 3, updateRoleDateTime)
+                .tableCellValueShouldHave("0", 3, dateTime)
                 //возвращаем исходные значения для вида оплаты
                 .openUpdateDialog("0")
-                .updateRole(ROLE_UPDATE_TITLE, Role)
-                .tableCellValueShouldHave("0", 1, Role.getName())
+                .updatePayment(PAYMENT_UPDATE_TITLE, payment)
+                .tableCellValueShouldHave("0", 1, payment.getName())
                 .tableCellValueShouldHave("0", 2, adminLogin)
-                .tableCellValueShouldHave("0", 3, updateRoleDateTime);
+                .tableCellValueShouldHave("0", 3, dateTime);
     }
 
 //****************************************************************************************************************************************************************************
@@ -178,7 +168,6 @@ public class DictionaryTest extends BaseTest {
 // TODO 5. Произвести попытку создания новой причины изменения СПБ с невалидными значениями
 // TODO 6. Произвести попытку редактирования новой причины изменения СПБ с невалидными значениями
 //****************************************************************************************************************************************************************************
-
 
     @Test(priority = 21, description = "Создать новую причину изменения СПБ с помощью UI (валидные значения)") //приоритет теста, название теста в Allure
     @Description("Проверить создание новой причины изменения СПБ с валидными значениями параметров. Создание произвести под ролью 'Администратор', как наиболее характерной для создания причины изменения СПБ. После проверки создания причины изменения СПБ удалить ее (используя API)") //описание теста в Allure
@@ -199,7 +188,7 @@ public class DictionaryTest extends BaseTest {
                 .tableCellValueShouldHave("0", 1, newChangeCause.getName())
                 .tableCellValueShouldHave("0", 2, newChangeCause.getSign())
                 .tableCellValueShouldHave("0", 3, adminLogin)
-                .tableCellValueShouldHave("0", 4, createChangeCauseDateTime)
+                .tableCellValueShouldHave("0", 4, dateTime)
                 .deleteChangeCause("0"); //TODO удалить причину изменения СПБ с помощью API;
 
     }
@@ -233,7 +222,7 @@ public class DictionaryTest extends BaseTest {
                 .tableCellValueShouldHave("0", 1, updateChangeCause.getName())
                 .tableCellValueShouldHave("0", 2, updateChangeCause.getSign())
                 .tableCellValueShouldHave("0", 3, adminLogin)
-                .tableCellValueShouldHave("0", 4, updateChangeCauseDateTime)
+                .tableCellValueShouldHave("0", 4, dateTime)
                 .deleteChangeCause("0"); //TODO удалить причину изменения СПБ с помощью API
     }
 
@@ -267,16 +256,16 @@ public class DictionaryTest extends BaseTest {
 //****************************************************************************************************************************************************************************
 
     @Test(priority = 31, description = "Отредактировать роль с помощью UI (валидные значения)")
-    @Description("Проверить редактирование роли с валидными значениями параметров. Редактирование произвести под ролью 'Администратор', как наиболее характерной для редактирования роли. ")
+    @Description("Проверить редактирование роли с валидными значениями параметров. Редактирование произвести под ролью 'Администратор', как наиболее характерной для редактирования роли")
     public void updateRole_UI(ITestContext context) {
 
         roleDictionaryPage
                 .openPage()
         .tableHeaderSortUp(1);
         log.debug("Тест " + context.getAttribute("testName") + ": создать объект с исходным названием роли");
-        RoleDictionary Role = RoleDictionaryFactory.get(roleDictionaryPage.tableCellValue("0",1));
+        RoleDictionary role = RoleDictionaryFactory.get(tableCellValue("0",1));
         log.debug("Тест " + context.getAttribute("testName") + ": создать объект с тестовыми данными для редактирования роли");
-        RoleDictionary updateRole = RoleDictionaryFactory.get(Role.getName() + "_update");
+        RoleDictionary updateRole = RoleDictionaryFactory.get(role.getName() + "_update");
 
         roleDictionaryPage
                  //редактируем роль
@@ -284,19 +273,19 @@ public class DictionaryTest extends BaseTest {
                 .updateRole(ROLE_UPDATE_TITLE, updateRole)
                 .tableCellValueShouldHave("0", 1, updateRole.getName())
                 .tableCellValueShouldHave("0", 2, adminLogin)
-                .tableCellValueShouldHave("0", 3, updateRoleDateTime)
+                .tableCellValueShouldHave("0", 3, dateTime)
                 //возвращаем исходные значения для роли
                 .openUpdateDialog("0")
-                .updateRole(ROLE_UPDATE_TITLE, Role)
-                .tableCellValueShouldHave("0", 1, Role.getName())
+                .updateRole(ROLE_UPDATE_TITLE, role)
+                .tableCellValueShouldHave("0", 1, role.getName())
                 .tableCellValueShouldHave("0", 2, adminLogin)
-                .tableCellValueShouldHave("0", 3, updateRoleDateTime);
+                .tableCellValueShouldHave("0", 3, dateTime);
     }
 
     @Ignore
     //TODO Почему-то после ввода '' в поле ввода 'Наименование' не появляется сообщение об ошибке! Так же сделать метод проверки появления ошибки отдельно (как завершающий ассерт)
     @Test(priority = 32, description = "Отредактировать роль с помощью UI (наименование пустое)")
-    @Description("Проверить попытку редактирования роли с пустым значением наименования. Редактирование произвести под ролью 'Администратор', как наиболее характерной для редактирования роли.")
+    @Description("Проверить попытку редактирования роли с пустым значением наименования. Редактирование произвести под ролью 'Администратор', как наиболее характерной для редактирования роли")
     public void updateRoleNameEmpty_UI(ITestContext context) throws InterruptedException, IOException {
 
         roleDictionaryPage
@@ -312,4 +301,38 @@ public class DictionaryTest extends BaseTest {
 //        roleDictionaryUpdatePage
 //                .nameErrorMessageShouldHave(INPUT_ERROR_MESSAGE);
     }
+
+//****************************************************************************************************************************************************************************
+//План тестирования справочника 'Справочник типов документов':
+// 1. Изменить тип документа (все поля). С помощью сортировки измененную запись поднять наверх - убедится, что значение изменено
+// TODO 2. Произвести попытку редактирования роли с невалидными значениями
+//****************************************************************************************************************************************************************************
+
+    @Test(priority = 41, description = "Отредактировать тип документа с помощью UI (валидные значения)")
+    @Description("Проверить редактирование типа документа с валидными значениями параметров. Редактирование произвести под ролью 'Администратор', как наиболее характерной для редактирования роли")
+    public void updateDocumentType_UI(ITestContext context) {
+
+        roleDictionaryPage
+                .openPage()
+                .tableHeaderSortUp(1);
+        log.debug("Тест " + context.getAttribute("testName") + ": создать объект с исходным названием типа документа");
+        RoleDictionary role = RoleDictionaryFactory.get(tableCellValue("0",1));
+        log.debug("Тест " + context.getAttribute("testName") + ": создать объект с тестовыми данными для редактирования типа документа");
+        RoleDictionary updateRole = RoleDictionaryFactory.get(role.getName() + "_update");
+
+        roleDictionaryPage
+                //редактируем роль
+                .openUpdateDialog("0")
+                .updateRole(ROLE_UPDATE_TITLE, updateRole)
+                .tableCellValueShouldHave("0", 1, updateRole.getName())
+                .tableCellValueShouldHave("0", 2, adminLogin)
+                .tableCellValueShouldHave("0", 3, dateTime)
+                //возвращаем исходные значения для роли
+                .openUpdateDialog("0")
+                .updateRole(ROLE_UPDATE_TITLE, role)
+                .tableCellValueShouldHave("0", 1, role.getName())
+                .tableCellValueShouldHave("0", 2, adminLogin)
+                .tableCellValueShouldHave("0", 3, dateTime);
+    }
+
 }
