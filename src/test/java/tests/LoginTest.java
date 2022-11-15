@@ -88,7 +88,7 @@ public class LoginTest extends BaseTest {
     @Test(priority = 10, description = "Войти в приложение под ролью 'Суперпользователь' (логин невалидный; пароль валидный)")
     public void loginInvalidUsernameAndValidPassword_SuperUser(ITestContext context) {
         loginPage
-                .login("123", superuserPassword);
+                .login("1234", superuserPassword);
         loginPage
                 .descriptionNotificationWindowShouldHave(MESSAGE_NOTIFICATION_WINDOW_01);
     }
@@ -97,7 +97,7 @@ public class LoginTest extends BaseTest {
     @Test(priority = 11, description = "Войти в приложение под ролью 'Суперпользователь' (логин валидный; пароль невалидный)")
     public void loginValidUsernameAndInvalidPassword_SuperUser(ITestContext context) {
         loginPage
-                .login(superuserLogin, "123");
+                .login(superuserLogin, "1234");
         loginPage
                 .descriptionNotificationWindowShouldHave(MESSAGE_NOTIFICATION_WINDOW_01);
     }
