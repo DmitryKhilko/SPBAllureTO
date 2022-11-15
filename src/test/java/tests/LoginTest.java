@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.AllureId;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import lombok.extern.log4j.Log4j2;
@@ -23,7 +24,8 @@ public class LoginTest extends BaseTest {
     }
 
     @Description("Войти в приложение под ролью 'Суперпользователь'. Проверить после входа в приложение: наличие пункта меню с именем текущего пользователя; наличие пунктов горизонтального меню, соответствующих роли; работоспособность пунктов горизонтального и вертикального меню") //описание теста в Allure
-    @Test(priority = 1, description = "Войти в приложение под ролью 'Суперпользователь' (логин валидный; пароль валидный)") //приоритет теста, название теста в Allure
+    @Test(priority = 1, description = "Войти в приложение под ролью 'Суперпользователь' (логин валидный; пароль валидный)")
+    @AllureId("84") //приоритет теста, название теста в Allure
     public void loginValidUsernameAndPassword_superUser(ITestContext context) {
         loginPage
                 .login(superuserLogin, superuserPassword);
@@ -31,6 +33,7 @@ public class LoginTest extends BaseTest {
 
     @Description("Войти в приложение под ролью 'Администратор'. Проверить после входа в приложение: наличие пункта меню с именем текущего пользователя; наличие пунктов горизонтального меню, соответствующих роли; работоспособность пунктов горизонтального и вертикального меню")
     @Test(priority = 2, description = "Войти в приложение под ролью 'Администратор' (логин валидный; пароль валидный)")
+    @AllureId("85")
     public void loginValidUsernameAndPassword_admin(ITestContext context) {
         loginPage
                 .login(adminLogin, adminPassword)
@@ -40,6 +43,7 @@ public class LoginTest extends BaseTest {
 
     @Description("Войти в приложение под ролью 'Специалист Минфина'. Проверить после входа в приложение: наличие пункта меню с именем текущего пользователя; наличие пунктов горизонтального меню, соответствующих роли; работоспособность пунктов горизонтального и вертикального меню")
     @Test(priority = 3, description = "Войти в приложение под ролью 'Специалист Минфина' (логин валидный; пароль валидный)")
+    @AllureId("86")
     public void loginValidUsernameAndPassword_specialistMinfin(ITestContext context) {
         loginPage
                 .login(specialistMinfinLogin, specialistMinfinPassword)
@@ -47,7 +51,8 @@ public class LoginTest extends BaseTest {
     }
 
     @Description("Войти в приложение под ролью 'Секретарь КК'. Проверить после входа в приложение: работоспособность пунктов горизонтального и вертикального меню") //описание теста в Allure
-    @Test(priority = 4, description = "Проверить работоспособность пунктов меню под ролью 'Секретарь КК'") //приоритет теста, название теста в Allure
+    @Test(priority = 4, description = "Проверить работоспособность пунктов меню под ролью 'Секретарь КК'")
+    @AllureId("87") //приоритет теста, название теста в Allure
     public void pageOpeningCheck_secretaryCommission(ITestContext context) {
         loginPage
                 .login(secretaryCommissionLogin, secretaryCommissionPassword)
@@ -58,6 +63,7 @@ public class LoginTest extends BaseTest {
 
     @Description("Войти в приложение под ролью 'Член КК'. Проверить после входа в приложение: наличие пункта меню с именем текущего пользователя; наличие пунктов горизонтального меню, соответствующих роли; работоспособность пунктов горизонтального и вертикального меню")
     @Test(priority = 5, description = "Войти в приложение под ролью 'Член КК' (логин валидный; пароль валидный)")
+    @AllureId("88")
     public void loginValidUsernameAndPassword_memberCommission(ITestContext context) {
         loginPage
                 .login(memberCommissionLogin, memberCommissionPassword)
@@ -77,6 +83,7 @@ public class LoginTest extends BaseTest {
 
     @Description("Сделать попытку входа в приложение с пустым полем ввода пароля")
     @Test(priority = 9, description = "Войти в приложение под ролью 'Суперпользователь' (логин валидный; пароль пустой)")
+    @AllureId("89")
     public void loginValidUsernameAndEmptyPassword_SuperUser(ITestContext context) {
         loginPage
                 .login(superuserLogin, "");
@@ -86,6 +93,7 @@ public class LoginTest extends BaseTest {
 
     @Description("Сделать попытку входа в приложение с некорректным значением логина")
     @Test(priority = 10, description = "Войти в приложение под ролью 'Суперпользователь' (логин невалидный; пароль валидный)")
+    @AllureId("90")
     public void loginInvalidUsernameAndValidPassword_SuperUser(ITestContext context) {
         loginPage
                 .login("1234", superuserPassword);
@@ -95,6 +103,7 @@ public class LoginTest extends BaseTest {
 
     @Description("Сделать попытку входа в приложение с некорректным значением пароля")
     @Test(priority = 11, description = "Войти в приложение под ролью 'Суперпользователь' (логин валидный; пароль невалидный)")
+    @AllureId("91")
     public void loginValidUsernameAndInvalidPassword_SuperUser(ITestContext context) {
         loginPage
                 .login(superuserLogin, "1234");
