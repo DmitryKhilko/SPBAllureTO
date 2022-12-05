@@ -1,5 +1,6 @@
 package tests;
 
+import allure.AllureManual;
 import io.qameta.allure.AllureId;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
@@ -28,7 +29,7 @@ public class LoginTest extends BaseTest {
     @AllureId("84") //приоритет теста, название теста в Allure
     public void loginValidUsernameAndPassword_superUser(ITestContext context) {
         loginPage
-                .login(superuserLogin, superuserPassword);
+                .login(superuserLogin, superuserPassword1);
     }
 
     @Description("Войти в приложение под ролью 'Администратор'. Проверить после входа в приложение: наличие пункта меню с именем текущего пользователя; наличие пунктов горизонтального меню, соответствующих роли; работоспособность пунктов горизонтального и вертикального меню")
@@ -109,5 +110,12 @@ public class LoginTest extends BaseTest {
                 .login(superuserLogin, "1234");
         loginPage
                 .descriptionNotificationWindowShouldHave(MESSAGE_NOTIFICATION_WINDOW_01);
+    }
+
+    @Test(description = "Новый ручной тест")
+    @AllureId("93")
+    @AllureManual
+    public void proba() {
+
     }
 }
